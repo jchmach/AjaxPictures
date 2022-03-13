@@ -2,15 +2,30 @@ import React from 'react';
 import SeatPicker from 'react-seat-picker';
 import "../style/SeatMap.css";
 
-export function SeatMap(props){
-    const {seatData} = props;
-    return (
-        <div className="SeatMap_Container">
-            <header>
-                <a href="/" id="SeatMap_Title">Seat Map</a>
-            </header>
-            <div id="Screen">Screen</div>
-            <SeatPicker id="SeatMap" rows = {seatData} visible/>
-        </div>
-    )
+class SeatMap extends React.Component{
+
+    constructor(props){
+        super(props)
+    }
+
+    state = {
+        loading: false
+    };
+   
+      render(){
+        return (
+            <div className="SeatMap_Container">
+                <h1 id="SeatMap_Title">Seat Map</h1>
+                <div id="Screen">Screen</div>
+                <SeatPicker 
+                    maxReservableSeats={this.props.availableSeats} 
+                    id="SeatMap" 
+                    rows = {this.props.seatData} 
+                    visible 
+                    alpha/>
+            </div>
+        )
+      }
+
 }
+export default SeatMap;
