@@ -1,13 +1,10 @@
-.seat {
-    background-color: green;
-  }
   
   .seat--reserved {
     background-color: gray;
   }
   
   .seat--selected {
-    background-color: blue;
+    background-color: green;
   }
 
 .seat-picker {
@@ -16,6 +13,7 @@
 
 .seat:not(.seat--reserved):hover{
     background-color: blue;
+    cursor:pointer;
 }
 
 div.blank {
@@ -24,15 +22,27 @@ div.blank {
 
 #Screen{
     height: auto;
+    width: 75%;
     padding-top: 5px;
     padding-bottom: 5px;
     display: flex;
     justify-content: center;
     background-color: blue;
     color: aliceblue;
-    margin-left: 50px;
-    margin-right: 50px;
+    align-self: center;
     margin-bottom: 100px;
     
     
+}
+
+.SeatMap_Container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+#SeatMap_Title{
+  display: flex;
+  justify-content: center;
 }
