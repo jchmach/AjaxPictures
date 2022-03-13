@@ -1,0 +1,38 @@
+.seat {
+    background-color: green;
+  }
+  
+  .seat--reserved {
+    background-color: gray;
+  }
+  
+  .seat--selected {
+    background-color: blue;
+  }
+
+.seat-picker {
+    margin: auto;
+  }
+
+.seat:not(.seat--reserved):hover{
+    background-color: blue;
+}
+
+div.blank {
+  display: none;
+}
+
+#Screen{
+    height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+    color: aliceblue;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 100px;
+    
+    
+}
