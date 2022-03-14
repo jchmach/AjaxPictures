@@ -1,8 +1,20 @@
 import mongoose from "mongoose"
-import hash from 'bcryptjs'
+import pkg from "bcryptjs"
+const { hash, compare } = pkg;
+
 const userSchema = new mongoose.Schema({
-    email: String,
-    username: String,
+    email: {
+        type: String,
+        validate: {
+            validator: async email => await User.where({email}).countDocuments() === 0
+        }
+    },
+    username: {
+        type: String,
+        validate: {
+            validator: async username => await User.where({username}).countDocuments() === 0
+        }
+    },
     name: String,
     password: String
 }, {
@@ -11,8 +23,13 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', async function () {
     if (this.isModified('password')){
-            this.password = await hash(this.password, 10)
+        this.password = await hash(this.password, 10)
     }
 })
 
-export default mongoose.model('User', userSchema)
+userSchema.methods.matchesPassword = function (password){
+    return compare(password, this.password)
+}
+
+const User = mongoose.model('User', userSchema)
+export default User
