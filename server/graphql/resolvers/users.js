@@ -3,11 +3,41 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {UserInputError} = require('apollo-server');
 
-const {validateRegisterInput} = require('../../utils/validators')
+const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
 const {SECRET} = require('../../config');
+
+function genToken(user){
+    return jwt.sign({
+        id: user.id,
+        email: user.email,
+        username: user.username
+    }, SECRET, {expiresIn: '2h'});
+}
 
 module.exports = {
     Mutation : {
+        async login(_, {username, password}){
+            const { valid, errors} = validateLoginInput(username, password);
+            if(!valid){
+                throw new UserInputError('Incorrect Credentials', {errors})
+            }
+            const user = await User.findOne({username});
+            if (!user){
+                errors.general = 'User does not exist';
+                throw new UserInputError('User does not exist', {errors})
+            } 
+            const match = await bcrypt.compare(password, user.password);
+            if(!match){
+                errors.general = 'Incorrect Credentials';
+                throw new UserInputError('Incorrect Credentials', {errors})
+            }
+            const token = genToken(user);
+            return {
+                ...user._doc,
+                id: user._id,
+                token
+            }
+        },
         async register(
             _,
             {
@@ -40,11 +70,7 @@ module.exports = {
                 createdAt: new Date().toISOString()
             })
             const res = await newUser.save();
-            const token = jwt.sign({
-                id: res.id,
-                email: res.email,
-                username: res.username
-            }, SECRET, {expiresIn: '2h'});
+            const token = genToken(res);
             return {
                 ...res._doc,
                 id: res._id,
