@@ -6,7 +6,7 @@ const timeslotSchema = new mongoose.Schema({
     movieTitle: String,
     date: String,
     timeSlot: String,
-    Seating: [{row: String, number: String, id: String}],
+    seating: [{row: String, number: String, id: String, isReserved: Boolean}],
     availableSeats: Number,
     theater: Number
 }, {timestamps: true})
