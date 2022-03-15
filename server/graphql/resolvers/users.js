@@ -49,7 +49,7 @@ module.exports = {
             //Validation
             const { valid, errors} = validateRegisterInput(username, email, password, confirmPassword)
             if (!valid){
-                throw new UserInputError('Erros', {errors});
+                throw new UserInputError('Errors', {errors});
             }
             //Make sure user doesn't exist
             const user = await User.findOne({username});
