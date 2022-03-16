@@ -7,9 +7,10 @@ export default gql `
     }
 
     extend type Mutation{
-        createTimeslot(movieId: String, date: String, timeSlot: String): Timeslot
+        createTimeslot(movieId: String, movieTitle: String, theater: Number, date: String, timeSlot: String): Timeslot
         removeTimeslot(movieId: String, date: String, timeSlot: String): Timeslot
-        reserveSeats(seating: [{row: String, number: String, id: String, isReserved: Boolean}!]!): Timeslot
+        reserveSeats(seats: [[{row: String, number: String, id: String}!]!]!, movieId: String, date: String, timeSlot: String): Timeslot
+        unreserveSeats(seats: [[{row: String, number: String, id: String, isReserved: Boolean}!]!]!, movieId: String, date: String, timeSlot: String): Timeslot
     }
 
     type Timeslot{
