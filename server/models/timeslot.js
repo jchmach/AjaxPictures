@@ -1,14 +1,14 @@
-import mongoose from "mongoose";
+const {model, Schema} = require('mongoose');
 
 
-const timeslotSchema = new mongoose.Schema({
+const timeslotSchema = new Schema({
     movieId: String,
     movieTitle: String,
     date: String,
     timeSlot: String,
-    seating: [{row: String, number: String, id: String, isReserved: Boolean}],
+    seating: [[{row: String, number: String, id: String, isReserved: Boolean}]],
     availableSeats: Number,
     theater: Number
 }, {timestamps: true})
 
-export default mongoose.model('Timeslot', timeslotSchema);
+module.exports = model("Timeslot", timeslotSchema);
