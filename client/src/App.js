@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Login from './pages/Login'
 import Register from './pages/Register'
 import MenuBar from './components/MenuBar';
+import Movie from './pages/Movie';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/" element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/movie" element={<Movie/>}/>
           </Routes>
         </Container>
       </Router>
