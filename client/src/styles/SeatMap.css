@@ -46,3 +46,11 @@ div.blank {
   display: flex;
   justify-content: center;
 }
+
+
+.SeatMap_Purchase{
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 2px;
+  color: blue;
+}

@@ -1,10 +1,11 @@
 const {UserInputError} = require('apollo-server');
+const s = require('connect-redis');
 
 const Timeslot = require('../../models/Timeslot');
 
 module.exports = {
     Query: {
-        async timeslots: (root, {movieId, date, timeSlot}, context, info) => {
+        async timeslot: (root, {movieId, date, timeSlot}, context, info) => {
             const slot = await Timeslot.findOne({movieId: movieId, date: date, timeSlot: timeSlot});
             if (!slot) throw new UserInputError('No timeslot found for movie: ' + movieId + ' and time: ' + date + " " + timeSlot);
             return slot;
@@ -49,6 +50,8 @@ module.exports = {
                 const row = seats[i].row;
                 seating[row - 1][seats[i].number - 1].isReserved = true;
             }
+            // Update the seat count
+            slot.availableSeats -= seats.length;
             // Update the timeslot with the new seating plan
             return Timeslot.updateOne({movieId: movieId, date: date, timeSlot: timeSlot}, {seating: seating});
         },
@@ -61,6 +64,8 @@ module.exports = {
                 const row = seats[i].row;
                 seating[row - 1][seats[i].number - 1].isReserved = false;
             }
+            // Update the seat count
+            slot.availableSeats += seats.length;
             // Update the timeslot with the new seating plan
             return Timeslot.updateOne({movieId: movieId, date: date, timeSlot: timeSlot}, {seating: seating});
         }

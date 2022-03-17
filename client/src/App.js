@@ -9,6 +9,8 @@ import { AuthProvider } from './context/auth';
 import Home from './pages/Home';
 import Login from './pages/Login'
 import Register from './pages/Register'
+import MovieTimeslots from './pages/MovieTimeslots';
+import PurchaseTicket from './pages/PurchaseTicket';
 import MenuBar from './components/MenuBar';
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
             <Route exact path="/" element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/movietimeslots" element={<MovieTimeslots/>}/>
+            <Route path="/purchaseticket" element={<PurchaseTicket/>}/>
           </Routes>
         </Container>
       </Router>
