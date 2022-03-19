@@ -33,7 +33,7 @@ module.exports = gql`
         removeTimeslot(movieId: String, date: String, timeSlot: String): Timeslot
         reserveSeats(seatReservations: SeatReservation): Timeslot
         unreserveSeats(seatReservations: SeatReservation): Timeslot
-        purchaseTickets(userId: ID!, seats: [Seats]!): Ticket
+        purchaseTickets(userId: ID!, seats: [Seats]!): [Ticket]
         refundTicket(ticketId: ID!): Ticket
     }
 
@@ -63,7 +63,7 @@ module.exports = gql`
         date: String!,
         timeSlot: String!,
         seatRow: String!,
-        seatNumber: Int!
+        seatNumber: String!
     }
 
     input Seats{
@@ -72,14 +72,14 @@ module.exports = gql`
         date: String!
         timeSlot: String!
         seatRow: String!
-        seatNumber: Int!
+        seatNumber: String!
 
     }
 
 
     input reservationElement{
-        row: String
-        number: Int
+        seatRow: String
+        seatNumber: String
         id: String
     } 
 

@@ -47,13 +47,13 @@ module.exports = {
             const seating = slot.seating;
             // Set selected seats to reserved
             for (let i = 0; i < seats.length; i++){
-                const row = seats[i].row;
-                seating[row - 1][seats[i].number - 1].isReserved = true;
+                const row = seats[i].seatRow;
+                seating[row.charCodeAt(0) - 65][parseInt(seats[i].seatNumber) - 1].isReserved = true;
             }
             // Update the seat count
-            slot.availableSeats -= seats.length;
+            const availableSeats = slot.availableSeats - seats.length;
             // Update the timeslot with the new seating plan
-            return Timeslot.updateOne({movieId: movieId, date: date, timeSlot: timeSlot}, {seating: seating});
+            return Timeslot.updateOne({movieId: movieId, date: date, timeSlot: timeSlot}, {seating: seating, availableSeats: availableSeats});
         },
         async unreserveSeats (root, {seatReservations: {seats, movieId, date, timeSlot}}, context, info){
             // Get the current timeslots seating plan
@@ -61,13 +61,13 @@ module.exports = {
             const seating = slot.seating;
             // Reset the seats to unreserved
             for (let i = 0; i < seats.length; i++){
-                const row = seats[i].row;
-                seating[row - 1][seats[i].number - 1].isReserved = false;
+                const row = seats[i].seatRow;
+                seating[row.charCodeAt(0) - 65][parseInt(seats[i].seatNumber) - 1].isReserved = false;
             }
             // Update the seat count
-            slot.availableSeats += seats.length;
+            const availableSeats = slot.availableSeats - seats.length;
             // Update the timeslot with the new seating plan
-            return Timeslot.updateOne({movieId: movieId, date: date, timeSlot: timeSlot}, {seating: seating});
+            return Timeslot.updateOne({movieId: movieId, date: date, timeSlot: timeSlot}, {seating: seating, availableSeats: availableSeats});
         }
 
     }

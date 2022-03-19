@@ -10,9 +10,10 @@ function MovieTimeslots(){
         movieId: "",
         date: "",
         timeslot: "",
-        movieTitle: "The Batman"
+        movieTitle: ""
     })
     const [navigatePurchase] = useLazyQuery(GET_SEATING, {
+        fetchPolicy:'network-only',
         variables: {movieId: movieData.movieId, date: movieData.date, timeslot: movieData.timeslot},
         onCompleted(data){
             var seating = data.timeslot.seating;
@@ -32,7 +33,7 @@ function MovieTimeslots(){
     }, [movieData])
 
     const viewSeatMap = (movieId, date, timeSlot) => {
-        setData({movieId: movieId, date: date, timeslot: timeSlot});
+        setData({movieId: movieId, date: date, timeslot: timeSlot, movieTitle: "The Batman"});
     }
 
     return(
