@@ -19,12 +19,7 @@ function PurchaseTicket(){
     const context = useContext(AuthContext);
 
     const [selected, setSeats] = useState([]);
-    // const[seatPlan, setPicker] = useState({
-    //     arrangement: [[]],
-    //     availableSeats: 0
-    // })
-    // const [seatPlan, setPlan] = useState([[]]);
-    // const [availableSeats, setVacant] = useState(0);
+
     const [reserveSeats] = useMutation(RESERVE_SEATS, {
         variables: {movieId: params.state.movieData.movieId, date: params.state.movieData.movieId, timelot: params.state.movieData.timeSlot, seats: selected}
     })
@@ -33,8 +28,7 @@ function PurchaseTicket(){
     const [reserveTicket] = useMutation(PURCHASE_TICKET, {
         variables: {userId: context.user, seats: selected }
     })
-    // var seatPlan = [];
-    // var availableSeats = 0;
+
     const purchase = (seats) => {
         setSeats(seats);
         reserveSeats();
@@ -45,23 +39,7 @@ function PurchaseTicket(){
     }
 
 
-    // useQuery(GET_SEATING, {
-    //     variables: {movieId: params.state.movieId.movieId, date: params.state.movieId.date, timeslot: params.state.movieId.timeslot},
-    //     onCompleted(data){
-    //         setPicker({arrangement: data.timeslot.seating, availableSeats: data.timeslot.availableSeats})
-    //     },
-    //     onError(){
-    //         console.log(params.state.movieId);
-    //         console.log(params.state.date);
-    //         console.log(params.state.timeSlot);
-    //     }
-    // });
 
-    // useEffect(() => {
-    //     console.log(seatPlan);
-    // }, [seatPlan])
-
-    //const data = [];
     return(
         <div id="Purchase_Page">
         <div id="Purchase_MovieInfo">
