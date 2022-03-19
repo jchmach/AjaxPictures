@@ -10,18 +10,22 @@ function SeatMap(props) {
     const [seats, setSeat] = useState([]);
 
 
-    const addSeatCallback = (row, number, id) => {
+    const addSeatCallback = ({row, number, id}, addCb) => {
         const newReservation = { seatRow: row, seatNumber: number, id: id };
         setSeat(() => [...seats, newReservation]);
+        addCb(row, number, id);
     };
 
 
-    const removeSeatCallback = (row, number, id) => {
+    const removeSeatCallback = ({row, number}, removeCb) => {
         const temp = seats.filter(function (seat) {
             return !(seat.seatRow === row && seat.seatNumber === number)
         });
         setSeat(temp);
+        removeCb(row, number);
     }
+
+
 
     return (
         <div className="SeatMap_Container">
@@ -32,7 +36,7 @@ function SeatMap(props) {
                 id="SeatMap"
                 rows={seatData}
                 addSeatCallback={addSeatCallback}
-                removeSeatCallbac={removeSeatCallback}
+                removeSeatCallback={removeSeatCallback}
                 visible
                 alpha />
             <Button id="SeatMap_Purchase" onClick={()=> purchase(seats)} disabled={!seats.length}>Purchase Tickets</Button>

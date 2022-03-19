@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import gql from "graphql-tag";
 import {useMutation, useQuery} from '@apollo/react-hooks'
 import { useNavigate, useLocation } from "react-router-dom";
@@ -19,40 +19,47 @@ function PurchaseTicket(){
     const context = useContext(AuthContext);
 
     const [selected, setSeats] = useState([]);
+    // const[seatPlan, setPicker] = useState({
+    //     arrangement: [[]],
+    //     availableSeats: 0
+    // })
     // const [seatPlan, setPlan] = useState([[]]);
     // const [availableSeats, setVacant] = useState(0);
     const [reserveSeats] = useMutation(RESERVE_SEATS, {
-        variables: {movieId: params.state.movieId, date: params.state.movieId, timelot: params.state.timeSlot, seats: selected}
+        variables: {movieId: params.state.movieData.movieId, date: params.state.movieData.movieId, timelot: params.state.movieData.timeSlot, seats: selected}
     })
 
 
     const [reserveTicket] = useMutation(PURCHASE_TICKET, {
         variables: {userId: context.user, seats: selected }
     })
-    var seatPlan = [];
-    var availableSeats = 0;
+    // var seatPlan = [];
+    // var availableSeats = 0;
     const purchase = (seats) => {
         setSeats(seats);
         reserveSeats();
-        seats.map(seat => ({...seat, movieId: params.state.movieId, date: params.state.date, timeslot: params.state.timeSlot, movieTitle: params.state.movieTitle}) )
+        seats.map(seat => ({...seat, movieId: params.state.movieData.movieId, date: params.state.movieData.date, timeslot: params.state.movieData.timeSlot, movieTitle: params.state.movieData.movieTitle}) )
         setSeats(seats);
         reserveTicket();
         navigation("/");
     }
 
 
-    useQuery(GET_SEATING, {
-        variables: {movieId: params.state.movieId.movieId, date: params.state.movieId.date, timeslot: params.state.movieId.timeslot},
-        onCompleted(data){
-            availableSeats = data.timeslot.availableSeats;
-            seatPlan = data.timeslot.seating;
-        },
-        onError(){
-            console.log(params.state.movieId);
-            console.log(params.state.date);
-            console.log(params.state.timeSlot);
-        }
-    });
+    // useQuery(GET_SEATING, {
+    //     variables: {movieId: params.state.movieId.movieId, date: params.state.movieId.date, timeslot: params.state.movieId.timeslot},
+    //     onCompleted(data){
+    //         setPicker({arrangement: data.timeslot.seating, availableSeats: data.timeslot.availableSeats})
+    //     },
+    //     onError(){
+    //         console.log(params.state.movieId);
+    //         console.log(params.state.date);
+    //         console.log(params.state.timeSlot);
+    //     }
+    // });
+
+    // useEffect(() => {
+    //     console.log(seatPlan);
+    // }, [seatPlan])
 
     //const data = [];
     return(
@@ -62,38 +69,18 @@ function PurchaseTicket(){
         </div>
         <div id="Header">
             <Button onClick={goBack}>Go back</Button>
-            <Label>{params.state.movieId.date}</Label>
-            <Label>{params.state.movieId.timeslot}</Label>
+            <Label>{params.state.movieData.date}</Label>
+            <Label>{params.state.movieData.timeslot}</Label>
         </div>
         <div id="Purchase_Container">
-            <SeatMap seatData={seatPlan} availableSeats={availableSeats} purchase={purchase}></SeatMap>
+            <SeatMap seatData={params.state.seating} availableSeats={params.state.availableSeats} purchase={purchase}></SeatMap>
         </div>
     </div>
     )
 }
 
 
-const GET_SEATING = gql`
-    query timeslot(
-        $movieId: String
-        $date: String
-        $timeslot: String
-    ) {
-       timeslot(
-           movieId: $movieId
-           date: $date
-           timeSlot: $timeslot
-       ){
-           seating{
-               row
-               number
-               id
-               isReserved
-           }
-           availableSeats
-       }
-    }
-`
+
 
 
 const RESERVE_SEATS = gql`

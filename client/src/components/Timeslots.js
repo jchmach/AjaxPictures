@@ -1,6 +1,5 @@
 import React, {useState, useEffect } from 'react';
 import gql from "graphql-tag";
-//import { useQuery} from '@apollo/react-hooks'
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { Grid, Dropdown, Segment } from 'semantic-ui-react';
 
@@ -44,7 +43,7 @@ function Timeslots (props){
             <Grid stackable columns={5}>
                 {slots.map((timeslot) => (
                     <Grid.Column key={timeslot} >
-                        <Segment onClick={() => viewSeatMap({movieId, date, timeslot})}>{timeslot}</Segment>
+                        <Segment onClick={() => viewSeatMap(movieId, date, timeslot)}>{timeslot}</Segment>
                     </Grid.Column>
                 ))}
             </Grid>
