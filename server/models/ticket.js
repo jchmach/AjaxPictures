@@ -10,4 +10,4 @@ const ticketSchema = new Schema({
     seatNumber: Number
 }, {timestamps: true})
 
-module.exports = model("Ticker", ticketSchema);
+module.exports = model("Ticket", ticketSchema);

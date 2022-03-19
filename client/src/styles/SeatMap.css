@@ -52,5 +52,6 @@ div.blank {
   width: 100%;
   margin-top: 10px;
   border-radius: 2px;
-  color: blue;
+  background-color: lightblue;
+
 }

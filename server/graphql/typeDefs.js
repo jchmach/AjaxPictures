@@ -19,17 +19,17 @@ module.exports = gql`
     type Query{
         sayHi:String
         timeslot(movieId: String, date: String, timeSlot: String ): Timeslot
-        timeslotTimes(movieId: String, date: String): [Timeslot!]!
-        timeslotDates(movieId: String): [Timeslot!]!
+        timeslotTimes(movieId: String, date: String): [Timeslot]
+        timeslotDates(movieId: String): [Timeslot]
         ticketHistory(userId: ID!): [Ticket]
         ticketsByMovie(movieId: ID!): [Ticket]
         ticketsByDate(date: String): [Ticket]
-        ticketByMovieDate(movieId: ID!, date: String): [Ticket]
+        ticketsByMovieDate(movieId: ID!, date: String): [Ticket]
     }
     type Mutation{
         register(registerInput: RegisterInput): User!
         login(username:String!, password: String!): User!
-        createTimeslot(movieId: String, movieTitle: String, theater: Number, date: String, timeSlot: String): Timeslot
+        createTimeslot(movieId: String, movieTitle: String, theater: Int, date: String, timeSlot: String): Timeslot
         removeTimeslot(movieId: String, date: String, timeSlot: String): Timeslot
         reserveSeats(seatReservations: SeatReservation): Timeslot
         unreserveSeats(seatReservations: SeatReservation): Timeslot
@@ -38,21 +38,21 @@ module.exports = gql`
     }
 
 
-    input SeatReservation {
-        seats: [{row: String, number: Number, id: String}!]!
+    input SeatReservation{
+        seats: [reservationElement!]!
         movieId: String!
         date: String!
         timeSlot: String!
     }
 
     type Timeslot{
-        seating: [[{row: String, number: String, id: String, isReserved: Boolean}!]!]!
-        availableSeats: Number
-        theater: Number!
+        seating: [[timeslotSeatings!]!]!
+        availableSeats: Int
+        theater: Int!
         movieId: String!
         movieTitle: String!
         date: String!
-        timeslot: String!
+        timeSlot: String!
     }
 
     type Ticket{
@@ -63,7 +63,7 @@ module.exports = gql`
         date: String!,
         timeSlot: String!,
         seatRow: String!,
-        seatNumber: Number!
+        seatNumber: Int!
     }
 
     input Seats{
@@ -72,8 +72,22 @@ module.exports = gql`
         date: String!
         timeSlot: String!
         seatRow: String!
-        seatNumber: Number!
+        seatNumber: Int!
 
+    }
+
+
+    input reservationElement{
+        row: String
+        number: Int
+        id: String
+    } 
+
+    type timeslotSeatings{
+        row: String
+        number: String
+        id: String
+        isReserved: Boolean
     }
 
 `;

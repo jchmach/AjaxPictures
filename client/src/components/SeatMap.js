@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import SeatPicker from 'react-seat-picker';
-import "../style/SeatMap.css";
+import "../styles/SeatMap.css";
 import { Button } from 'semantic-ui-react'
 
 function SeatMap(props) {
 
-    const [availableSeats, seatData, purchase] = props;
+    const {availableSeats, seatData, purchase} = props;
 
     const [seats, setSeat] = useState([]);
 
@@ -35,7 +35,7 @@ function SeatMap(props) {
                 removeSeatCallbac={removeSeatCallback}
                 visible
                 alpha />
-            <Button id="SeatMap_Purchase" onClick={()=> purchase(seats)} disabled={!seats.length}></Button>
+            <Button id="SeatMap_Purchase" onClick={()=> purchase(seats)} disabled={!seats.length}>Purchase Tickets</Button>
         </div>
     )
 

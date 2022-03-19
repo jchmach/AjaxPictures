@@ -5,13 +5,12 @@ function MovieTimeslots(){
 
     const navigate = useNavigate();
     navigate()
-    const viewSeatMap = (movieId, date, timeSlot, seating, availableSeats) => {
+    const viewSeatMap = (movieId, date, timeSlot) => {
         navigate('/PurchaseTicket', {
             state:{
                 movieId,
                 date,
-                timeSlot,
-                movieTitle: "The Batman"
+                timeSlot
             }
         });
     }

@@ -1,30 +1,41 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import gql from "graphql-tag";
-import {useMutation, useQuery} from '@apollo/react-hooks'
+//import { useQuery} from '@apollo/react-hooks'
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { Grid, Dropdown, Segment } from 'semantic-ui-react';
-import Timeslot from '../../../server/models/Timeslot';
 
 function Timeslots (props){
-
     const {movieId, viewSeatMap} = props;
-    const [date, setDates] = useState({
-        date: ""
-    })
-    const [{loading, error, data}] = useQuery(MOVIE_DATES, {
-        variables: {movieId}
+    const [date, setDate] = useState("")
+
+    const [dropdownOpts, setOptions] = useState([]);
+    const [slots, setTimeslots] = useState([]);
+    useQuery(MOVIE_DATES, {
+        variables: {movieId: movieId},
+        onCompleted(data){
+            var unique = [...new Set(data.timeslotDates.map(obj => obj.date))];
+            var temp = unique.map(date => ({text: date, key: date, value: date}));
+            setOptions(temp);
+        }
     });
 
-    const dropdownOpts = data.map(({date}) => ({text: date, key: date, value: date}));
-
-
-    const [getTimeslots, {loading, error, slots}] = useQuery(MOVIE_TIMESLOTS, {
-        variables: {movieId, date}
+    const [getTimeslots] = useLazyQuery(MOVIE_TIMESLOTS, {
+        variables: {movieId: movieId, date: date},
+        onCompleted(data) {
+            setTimeslots(data.timeslotTimes.map(obj => obj.timeSlot));
+        },
+        onError(err){
+            console.log(err.message);
+        }
     });
+
+    useEffect(() => {
+        getTimeslots();
+    }, [date])
 
 
     const switchDate = (err, dropdown) => {
-        setDates(date, dropdown.value);
-        getTimeslots();
+        setDate(dropdown.value);
     }
 
     return(
@@ -48,9 +59,9 @@ const MOVIE_DATES = gql`
         $movieId: String
     ) {
        timeslotDates(
-           movieId: $id
+           movieId: $movieId
        ){
-           date
+            date
        }
     }
 `
@@ -62,10 +73,10 @@ const MOVIE_TIMESLOTS = gql`
         $date: String
     ) {
        timeslotTimes(
-           movieId: $id
+           movieId: $movieId
            date: $date
        ){
-           timeslot
+           timeSlot
        }
     }
 `

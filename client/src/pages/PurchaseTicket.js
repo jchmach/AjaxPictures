@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import gql from "graphql-tag";
-import {useMutation} from '@apollo/react-hooks'
+import {useMutation, useQuery} from '@apollo/react-hooks'
 import { useNavigate, useLocation } from "react-router-dom";
 import SeatMap from "../components/SeatMap";
 import { Button, Label } from "semantic-ui-react";
@@ -18,44 +18,55 @@ function PurchaseTicket(){
     
     const context = useContext(AuthContext);
 
-
     const [selected, setSeats] = useState([]);
-
+    // const [seatPlan, setPlan] = useState([[]]);
+    // const [availableSeats, setVacant] = useState(0);
     const [reserveSeats] = useMutation(RESERVE_SEATS, {
-        variables: {movieId: params.state.movieId, date: params.state.movieId, timeslot: params.state.timeslot, seats: selected}
+        variables: {movieId: params.state.movieId, date: params.state.movieId, timelot: params.state.timeSlot, seats: selected}
     })
 
 
     const [reserveTicket] = useMutation(PURCHASE_TICKET, {
         variables: {userId: context.user, seats: selected }
     })
-
+    var seatPlan = [];
+    var availableSeats = 0;
     const purchase = (seats) => {
         setSeats(seats);
         reserveSeats();
-        seats.map(seat => ({...seat, movieId: params.state.movieId, date: params.state.date, timeSlot: params.state.timeslot, movieTitle: params.state.movieTitle}) )
+        seats.map(seat => ({...seat, movieId: params.state.movieId, date: params.state.date, timeslot: params.state.timeSlot, movieTitle: params.state.movieTitle}) )
         setSeats(seats);
         reserveTicket();
         navigation("/");
     }
 
 
-    const [{loading, error, data}] = useQuery(GET_SEATING, {
-        variables: {movieId: params.state.movieId, date: params.state.date, timeslot: params.state.timeslot}
+    useQuery(GET_SEATING, {
+        variables: {movieId: params.state.movieId.movieId, date: params.state.movieId.date, timeslot: params.state.movieId.timeslot},
+        onCompleted(data){
+            availableSeats = data.timeslot.availableSeats;
+            seatPlan = data.timeslot.seating;
+        },
+        onError(){
+            console.log(params.state.movieId);
+            console.log(params.state.date);
+            console.log(params.state.timeSlot);
+        }
     });
 
+    //const data = [];
     return(
         <div id="Purchase_Page">
         <div id="Purchase_MovieInfo">
             <h1>The Batman</h1>
         </div>
         <div id="Header">
-            <Button onClick={goBack}></Button>
-            <Label>{date}</Label>
-            <Label>{timeslot}</Label>
+            <Button onClick={goBack}>Go back</Button>
+            <Label>{params.state.movieId.date}</Label>
+            <Label>{params.state.movieId.timeslot}</Label>
         </div>
         <div id="Purchase_Container">
-            <SeatMap seatData={data.seating} availableSeats={data.availableSeats} purchase={purchase}></SeatMap>
+            <SeatMap seatData={seatPlan} availableSeats={availableSeats} purchase={purchase}></SeatMap>
         </div>
     </div>
     )
@@ -69,11 +80,16 @@ const GET_SEATING = gql`
         $timeslot: String
     ) {
        timeslot(
-           movieId: $id
+           movieId: $movieId
            date: $date
-           timeslot: $timeslot
+           timeSlot: $timeslot
        ){
-           seating
+           seating{
+               row
+               number
+               id
+               isReserved
+           }
            availableSeats
        }
     }
@@ -82,7 +98,7 @@ const GET_SEATING = gql`
 
 const RESERVE_SEATS = gql`
     mutation reserveSeats(
-        $seats: [{row: String, number: Number, id: String}!]!
+        $seats: [reservationElement!]!
         $movieId: String!
         $date: String!
         $timeslot: String!
@@ -92,7 +108,7 @@ const RESERVE_SEATS = gql`
                 seats: $seats
                 movieId: $movieId
                 date: $date
-                timeslot: $timeslot
+                timeSlot: $timeslot
             }
         )
     }
@@ -102,7 +118,7 @@ const RESERVE_SEATS = gql`
 const PURCHASE_TICKET = gql`
     mutation purchaseTickets(
         $userId: String
-        $seats: [{movieId: String, date: String, timeSlot: String, seatRow: String, seatNumber: Number}!]!
+        $seats: [Seats!]!
     ) {
         purchaseTickets(
             userId: $userId
