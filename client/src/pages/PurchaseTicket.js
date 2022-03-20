@@ -6,6 +6,7 @@ import SeatMap from "../components/SeatMap";
 import { Button, Label } from "semantic-ui-react";
 import { AuthContext } from '../context/auth'
 import '../styles/PurchaseStyles.css'
+import MovieComponent from "../components/MovieComponent";
 
 
 
@@ -56,16 +57,13 @@ function PurchaseTicket(){
     return(
         <div id="Purchase_Page">
         <div id="Purchase_MovieInfo">
-            <h1>The Batman</h1>
-
-            <div id="Purchase_TimeslotInfoContainer">
-                <Label className="Purchase_TimeslotInfo">{params.state.movieData.date}</Label>
-                <Label className="Purchase_TimeslotInfo">{params.state.movieData.timeslot}</Label>
-            </div>
+            <MovieComponent onPurchasePage={true}  movieName="The Batman"></MovieComponent>           
 
         </div>
         <div id="Header">
             <Button id="Purchase_Return" onClick={goBack}>Back</Button>
+            <Label className="Purchase_TimeslotInfo">{params.state.movieData.date}</Label>
+            <Label className="Purchase_TimeslotInfo">{params.state.movieData.timeslot}</Label>
 
         </div>
         <div id="Purchase_Container">

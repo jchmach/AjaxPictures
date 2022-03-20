@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { useNavigate, useLocation } from "react-router-dom";
 import Timeslots from "../components/Timeslots";
+import MovieComponent from "../components/MovieComponent";
 function MovieTimeslots(){
 
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ function MovieTimeslots(){
     return(
         <div id="Purchase_Page">
             <div id="Purchase_MovieInfo">
-                <h1>The Batman</h1>
+                <MovieComponent onPurchasePage={true}  movieName="The Batman"></MovieComponent>           
             </div>
             <div id="Timeslots">
                 <Timeslots movieId={params.state.movieId} viewSeatMap={viewSeatMap}></Timeslots>
