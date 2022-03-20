@@ -11,6 +11,7 @@ function Timeslots (props){
     const [dropdownOpts, setOptions] = useState([]);
     const [slots, setTimeslots] = useState([]);
     useQuery(MOVIE_DATES, {
+        fetchPolicy: 'network-only',
         variables: {movieId: movieId},
         onCompleted(data){
             var unique = [...new Set(data.timeslotDates.map(obj => obj.date))];
@@ -20,6 +21,7 @@ function Timeslots (props){
     });
 
     const [getTimeslots] = useLazyQuery(MOVIE_TIMESLOTS, {
+        fetchPolicy: 'network-only',
         variables: {movieId: movieId, date: date},
         onCompleted(data) {
             setTimeslots(data.timeslotTimes.map(obj => obj.timeSlot));
