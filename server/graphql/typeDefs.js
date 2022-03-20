@@ -38,6 +38,7 @@ module.exports = gql`
     type Query{
         sayHi:String
         GetMovie(Title: String): Movie
+        GetMovieYear(Title: String, Year: String): Movie
     }
     type Mutation{
         register(registerInput: RegisterInput): User!

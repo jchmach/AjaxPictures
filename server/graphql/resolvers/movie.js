@@ -10,6 +10,12 @@ module.exports = {
             const movie = await Movie.find({Title: Title});
             if (!movie.length) throw new UserInputError('No movie with that title exists in DB ' + Title);
             return movie[0]
+        },
+        async GetMovieYear(root, {Title,Year}, context, info){
+            console.log(Title)
+            const movie = await Movie.find({Title: Title, Year:Year});
+            if (!movie.length) throw new UserInputError('No movie with that title exists in DB ' + Title);
+            return movie[0]
         }
     },
     Mutation: {
