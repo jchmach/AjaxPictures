@@ -36,6 +36,33 @@ module.exports = {
             console.log(result_movie)
 
             return Movie.create(result_movie);
+        },
+        async createMovieYear(root, {Title, Year}, context, info){
+            const path = "https://www.omdbapi.com/?t=" 
+            + Title + "&y="
+            + Year
+            + "&apikey=362bd303"
+            console.log(path)
+            const mov = await axios.get(path)
+            movie = mov.data
+            console.log(movie.Title)
+            result_movie = {
+                Title: movie.Title,
+                Year: movie.Year,
+                Plot: movie.Plot,
+                Genre: movie.Genre,
+                Director: movie.Director,
+                Runtime : movie.Runtime,
+                Released : movie.Released,
+                Language: movie.Language,
+                Country: movie.Country,
+                Poster: movie.Poster,
+                imdb: movie.imdbRating,
+                MetaScore: movie.Metascore,
+            }
+            console.log(result_movie)
+
+            return Movie.create(result_movie);
         }
     },
 }
