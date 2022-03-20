@@ -1,0 +1,69 @@
+  
+  .seat--reserved {
+    background-color: gray;
+  }
+  
+  .seat--selected {
+    background-color: green;
+  }
+
+.seat-picker {
+    margin: auto;
+  }
+
+.seat:not(.seat--reserved):hover{
+    background-color: blue;
+    cursor:pointer;
+}
+
+div.blank {
+  display: none;
+}
+
+#Screen{
+    height: auto;
+    width: 50%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+    color: aliceblue;
+    align-self: center;
+    margin-bottom: 100px;
+    
+    
+}
+
+.SeatMap_Container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+#SeatMap_Title{
+  display: flex;
+  justify-content: center;
+}
+
+
+#SeatMap_Purchase:hover{
+  width: 60%;
+  align-self: center;
+  margin-top: 20px;
+  border-radius: 2px;
+  background-color: cornflowerblue;
+  color: white;
+}
+
+#SeatMap_Purchase{
+  width: 60%;
+  align-self: center;
+  margin-top: 20px;
+  border-radius: 2px;
+  border-style: solid;
+  border-color: cornflowerblue;
+  background-color: white;
+  color: cornflowerblue;
+}
