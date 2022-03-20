@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import gql from "graphql-tag";
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { Grid, Dropdown, Segment } from 'semantic-ui-react';
+import '../styles/Timeslot.css'
 
 function Timeslots (props){
     const {movieId, viewSeatMap} = props;
@@ -42,8 +43,8 @@ function Timeslots (props){
             <Dropdown placeholder ='Select date' options={dropdownOpts} onChange={switchDate} selection fluid></Dropdown>
             <Grid stackable columns={5}>
                 {slots.map((timeslot) => (
-                    <Grid.Column key={timeslot} >
-                        <Segment onClick={() => viewSeatMap(movieId, date, timeslot)}>{timeslot}</Segment>
+                    <Grid.Column key={timeslot} width={2}>
+                        <Segment id="Timeslot_grid"onClick={() => viewSeatMap(movieId, date, timeslot)}>{timeslot}</Segment>
                     </Grid.Column>
                 ))}
             </Grid>

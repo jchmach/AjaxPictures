@@ -22,7 +22,7 @@ div.blank {
 
 #Screen{
     height: auto;
-    width: 75%;
+    width: 50%;
     padding-top: 5px;
     padding-bottom: 5px;
     display: flex;
@@ -48,10 +48,22 @@ div.blank {
 }
 
 
-.SeatMap_Purchase{
-  width: 100%;
-  margin-top: 10px;
+#SeatMap_Purchase:hover{
+  width: 60%;
+  align-self: center;
+  margin-top: 20px;
   border-radius: 2px;
-  background-color: lightblue;
+  background-color: cornflowerblue;
+  color: white;
+}
 
+#SeatMap_Purchase{
+  width: 60%;
+  align-self: center;
+  margin-top: 20px;
+  border-radius: 2px;
+  border-style: solid;
+  border-color: cornflowerblue;
+  background-color: white;
+  color: cornflowerblue;
 }

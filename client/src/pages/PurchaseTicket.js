@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import SeatMap from "../components/SeatMap";
 import { Button, Label } from "semantic-ui-react";
 import { AuthContext } from '../context/auth'
-
+import '../styles/PurchaseStyles.css'
 
 
 
@@ -57,11 +57,16 @@ function PurchaseTicket(){
         <div id="Purchase_Page">
         <div id="Purchase_MovieInfo">
             <h1>The Batman</h1>
+
+            <div id="Purchase_TimeslotInfoContainer">
+                <Label className="Purchase_TimeslotInfo">{params.state.movieData.date}</Label>
+                <Label className="Purchase_TimeslotInfo">{params.state.movieData.timeslot}</Label>
+            </div>
+
         </div>
         <div id="Header">
-            <Button onClick={goBack}>Go back</Button>
-            <Label>{params.state.movieData.date}</Label>
-            <Label>{params.state.movieData.timeslot}</Label>
+            <Button id="Purchase_Return" onClick={goBack}>Back</Button>
+
         </div>
         <div id="Purchase_Container">
             <SeatMap seatData={params.state.seating} availableSeats={params.state.availableSeats} purchase={purchase}></SeatMap>
