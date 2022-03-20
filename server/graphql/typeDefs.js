@@ -44,6 +44,7 @@ module.exports = gql`
         ticketsByDate(date: String): [Ticket]
         ticketsByMovieDate(movieId: ID!, date: String): [Ticket]
         GetMovie(Title: String): Movie
+        GetMovieYear(Title: String, Year: String): Movie
     }
     type Mutation{
         register(registerInput: RegisterInput): User!
