@@ -10,7 +10,7 @@ module.exports = gql`
         createdAt: String!
     }
     type Movie{
-        MovieId:String
+        id:ID!
         Title:String
         Year:String
         Plot:String

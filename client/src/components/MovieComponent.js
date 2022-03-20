@@ -6,9 +6,9 @@ import { useEffect,useState } from "react";
 export default function MovieComponent(props) {
 
     let for_adding_in_admin = "mutation Mutation($title: String) {createMovie(Title: $title) {Title}}"
-
+    const {onPurchasePage, navigateNext} = props;
     const { loading, error, data } = useQuery(GET_MOVIE, {
-        variables: { "title": "The Godfather" },
+        variables: { "title": "The Batman" },
     });
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
@@ -16,7 +16,6 @@ export default function MovieComponent(props) {
     console.log(data.GetMovie)
     const movieItem = data.GetMovie
 
-  
   return (
     <div className="ui segment">
     <p></p>
@@ -76,9 +75,10 @@ export default function MovieComponent(props) {
         <p></p>
         <p></p>
         <p></p>
-        <button className="blue massive ui button">
-        Book
-        </button>
+        {onPurchasePage? null : <button className="blue massive ui button" onClick={() => navigateNext(movieItem.id)}>
+                                    Buy Ticket
+                                </button>}
+
         </div>
     </div>
   </div>
@@ -91,6 +91,7 @@ export default function MovieComponent(props) {
 const GET_MOVIE = gql `
     query GetMovie($title: String) {
         GetMovie(Title: $title) {
+        id
         Title
         Year
         Genre

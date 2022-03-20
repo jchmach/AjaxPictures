@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import gql from "graphql-tag";
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Timeslots from "../components/Timeslots";
 function MovieTimeslots(){
 
@@ -12,6 +12,9 @@ function MovieTimeslots(){
         timeslot: "",
         movieTitle: ""
     })
+
+    const params = useLocation();
+
     const [navigatePurchase] = useLazyQuery(GET_SEATING, {
         fetchPolicy:'network-only',
         variables: {movieId: movieData.movieId, date: movieData.date, timeslot: movieData.timeslot},
@@ -42,7 +45,7 @@ function MovieTimeslots(){
                 <h1>The Batman</h1>
             </div>
             <div id="Timeslots">
-                <Timeslots movieId="The Batman" viewSeatMap={viewSeatMap}></Timeslots>
+                <Timeslots movieId={params.state.movieId} viewSeatMap={viewSeatMap}></Timeslots>
             </div>
         </div>
     )
