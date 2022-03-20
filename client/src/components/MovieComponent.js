@@ -1,8 +1,11 @@
 import React from 'react'
 import { useEffect,useState } from "react";
-import axios from "axios";
+const axios = require("axios")
 
 export default function MovieComponent(props) {
+
+
+  let for_adding_in_admin = "mutation Mutation($title: String) {createMovie(Title: $title) {Title}}"
 
   const [movieName , setNameMovie ] = useState("");
   const [movieItem , setMovieItem ] = useState("");
