@@ -12,6 +12,7 @@ import Register from './pages/Register'
 import MovieTimeslots from './pages/MovieTimeslots';
 import PurchaseTicket from './pages/PurchaseTicket';
 import MenuBar from './components/MenuBar';
+import Movie from './pages/Movie';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/movietimeslots" element={<MovieTimeslots/>}/>
             <Route path="/purchaseticket" element={<PurchaseTicket/>}/>
+            <Route path="/movie" element={<Movie/>}/>
           </Routes>
         </Container>
       </Router>
