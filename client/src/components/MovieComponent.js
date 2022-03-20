@@ -1,92 +1,84 @@
 import React from 'react'
+import { gql, useQuery } from '@apollo/client';
 import { useEffect,useState } from "react";
-const axios = require("axios")
+
 
 export default function MovieComponent(props) {
 
+    let for_adding_in_admin = "mutation Mutation($title: String) {createMovie(Title: $title) {Title}}"
 
-  let for_adding_in_admin = "mutation Mutation($title: String) {createMovie(Title: $title) {Title}}"
+    const { loading, error, data } = useQuery(GET_MOVIE, {
+        variables: { "title": "The Godfather" },
+    });
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
 
-  const [movieName , setNameMovie ] = useState("");
-  const [movieItem , setMovieItem ] = useState("");
-  console.log(props)
+    console.log(data.GetMovie)
+    const movieItem = data.GetMovie
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(props)
-    const movie = await axios.get("https://www.omdbapi.com/?t=" 
-                                + props.movieName
-                                + "&apikey=362bd303", {
-    })
-    console.log(movie)
-    setMovieItem(movie.data)
-    console.log(movieItem)
-  }
-  useEffect(() => {
-    console.log(movieItem)
-  }, [movieItem])
   
   return (
     <div className="ui segment">
-    <div className="ui fluid action input">
-        <input 
-            type="text"
-            placeholder="Search..."
-            onChange={e=>setNameMovie(e.target.value)}
-        ></input>
-    <div className="ui button" onClick={handleSubmit}>Search</div>
-    </div>
     <p></p>
   <div className="ui two column very relaxed grid">
     <div className="column">
         <img className="ui fluid image" src={movieItem.Poster}></img>
     </div>
     <div className="column">
-        <div class="ui divided selection list">
+        <div className="ui divided selection list">
         <a class="item">
-            <div class="red ui extra large horizontal label">Title</div>
+            <div className="red ui extra large horizontal label">Title</div>
             {movieItem.Title}
         </a>
         <a class="item">
-            <div class="red ui horizontal label">Year</div>
+            <div className="red ui horizontal label">Year</div>
             {movieItem.Year}
         </a>
         <a class="item">
-            <div class="red ui horizontal label">Plot</div>
+            <div className="red ui horizontal label">Plot</div>
             {movieItem.Plot}
         </a>
         <a class="item">
-            <div class="red ui horizontal label">Genre</div>
+            <div className="red ui horizontal label">Genre</div>
             {movieItem.Genre}
         </a>
         <a class="item">
-            <div class="red ui horizontal label">Director</div>
+            <div className="red ui horizontal label">Director</div>
             {movieItem.Director}
         </a>
         <a class="item">
-            <div class="red ui horizontal label">Runtime</div>
+            <div className="red ui horizontal label">Runtime</div>
             {movieItem.Runtime}
         </a>
         <a class="item">
-            <div class="red ui horizontal label">Released</div>
+            <div className="red ui horizontal label">Released</div>
             {movieItem.Released}
         </a>
         <a class="item">
-            <div class="red ui horizontal label">Language</div>
+            <div className="red ui horizontal label">Language</div>
             {movieItem.Language}
         </a>
         <a class="item">
-            <div class="red ui horizontal label">Country</div>
+            <div className="red ui horizontal label">Country</div>
             {movieItem.Country}
         </a>
         <a class="item">
-            <div class="yellow ui horizontal label">imdb</div>
-            {movieItem.imdbRating}
+            <div className="yellow ui horizontal label">imdb</div>
+            {movieItem.imdb}
         </a>
         <a class="item">
-            <div class="yellow ui horizontal label">Meta Score</div>
-            {movieItem.Metascore}
+            <div className="yellow ui horizontal label">Meta Score</div>
+            {movieItem.MetaScore}
         </a>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <button className="blue massive ui button">
+        Book
+        </button>
         </div>
     </div>
   </div>
@@ -95,3 +87,22 @@ export default function MovieComponent(props) {
 </div>
   )
 }
+
+const GET_MOVIE = gql `
+    query GetMovie($title: String) {
+        GetMovie(Title: $title) {
+        Title
+        Year
+        Genre
+        Plot
+        Director
+        Runtime
+        Released
+        Language
+        Country
+        imdb
+        Poster
+        MetaScore
+        }
+  }
+`;

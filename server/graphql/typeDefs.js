@@ -20,6 +20,7 @@ module.exports = gql`
         Released :String
         Language:String
         Country:String
+        Poster:String
         imdb:String
         MetaScore:String
     }

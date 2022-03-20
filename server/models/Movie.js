@@ -11,6 +11,7 @@ const userSchema = new Schema({
     Released :String,
     Language:String,
     Country:String,
+    Poster:String,
     imdb:String,
     MetaScore:String
 });

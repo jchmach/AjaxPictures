@@ -6,6 +6,7 @@ const Movie = require('../../models/Movie');
 module.exports = {
     Query: {
         async GetMovie(root, {Title}, context, info){
+            console.log(Title)
             const movie = await Movie.find({Title: Title});
             if (!movie.length) throw new UserInputError('No movie with that title exists in DB ' + Title);
             return movie[0]
@@ -28,6 +29,7 @@ module.exports = {
                 Released : movie.Released,
                 Language: movie.Language,
                 Country: movie.Country,
+                Poster: movie.Poster,
                 imdb: movie.imdbRating,
                 MetaScore: movie.Metascore,
             }
@@ -37,14 +39,3 @@ module.exports = {
         }
     },
 }
-
-const books = [
-    {
-      title: 'The Awakening',
-      author: 'Kate Chopin',
-    },
-    {
-      title: 'City of Glass',
-      author: 'Paul Auster',
-    },
-];
