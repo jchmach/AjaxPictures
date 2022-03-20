@@ -42,6 +42,7 @@ module.exports = gql`
     type Mutation{
         register(registerInput: RegisterInput): User!
         createMovie(Title: String): Movie
+        createMovieYear(Title: String, Year: String): Movie
         login(username:String!, password: String!): User!
     }
 `;
