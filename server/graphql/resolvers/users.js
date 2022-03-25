@@ -1,11 +1,16 @@
-const User = require('../../models/User');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const {UserInputError} = require('apollo-server');
+//const User = require('../../models/User');
+import User from '../../models/user.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import {UserInputError} from 'apollo-server';
+// const bcrypt = require('bcryptjs');
+// const jwt = require('jsonwebtoken');
+// const {UserInputError} = require('apollo-server');
+import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
 
-const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
-const {SECRET} = require('../../config');
-
+// const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
+// const {SECRET} = require('../../config');
+import {SECRET} from '../../config.js'
 function genToken(user){
     return jwt.sign({
         id: user.id,
@@ -14,7 +19,7 @@ function genToken(user){
     }, SECRET, {expiresIn: '2h'});
 }
 
-module.exports = {
+export default {
     Mutation : {
         async login(_, {username, password}){
             const { valid, errors} = validateLoginInput(username, password);

@@ -1,8 +1,8 @@
-const {UserInputError} = require('apollo-server');
-
-const Ticket = require('../../models/Ticket');
-
-module.exports = {
+//const {UserInputError} = require('apollo-server');
+import {UserInputError} from 'apollo-server';
+//const Ticket = require('../../models/Ticket');
+import Ticket from '../../models/ticket.js'
+export default {
     Query: {
         async ticketHistory(root, {userId}, context, info){
             const slots = await Ticket.find({userId: userId});
