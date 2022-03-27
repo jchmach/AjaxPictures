@@ -1,4 +1,4 @@
-name: Publish React Skeleton to GHCR
+name: Publish Backend to GHCR
 
 on:
   push:
