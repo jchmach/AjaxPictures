@@ -49,7 +49,7 @@ jobs:
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
       
-      - name: SSH into droplet
+      - name: Deploy on droplet
         uses: appleboy/ssh-action@master
         with:
           host: ajaxpictures.me

@@ -8,7 +8,6 @@ WORKDIR /
 ENV PATH ./node_modules/.bin:$PATH
 COPY ./package.json ./
 RUN npm i --legacy-peer-deps
-RUN npm install react-scripts@3.4.1 -g
 COPY . .
 RUN npm run build
 
