@@ -9,7 +9,6 @@ on:
     paths:
       - client/**
 
-
 env:
   IMAGE_NAME: client-jchmach
 
@@ -59,4 +58,6 @@ jobs:
           script: |
             docker stop ajaxclient
             docker rm ajaxclient
+            docker stop ajaxserver
+            docker rm ajaxserver
             docker-compose pull && docker-compose up -d
