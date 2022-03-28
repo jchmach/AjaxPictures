@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from "react";
 import gql from "graphql-tag";
-import {useMutation, useQuery} from '@apollo/react-hooks'
+import {useMutation} from '@apollo/react-hooks'
 import { useNavigate, useLocation } from "react-router-dom";
 import SeatMap from "../components/SeatMap";
 import { Button, Label } from "semantic-ui-react";

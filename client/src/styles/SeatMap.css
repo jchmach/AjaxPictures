@@ -12,7 +12,7 @@
   }
 
 .seat:not(.seat--reserved):hover{
-    background-color: lightblue;
+    background-color: blue;
     cursor:pointer;
 }
 
