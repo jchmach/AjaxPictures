@@ -57,7 +57,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            docker pull ghcr.io/utscc09/server-jchmach:justindeploytest
+            docker stop ajaxclient
+            docker rm ajaxclient
             docker stop ajaxserver
             docker rm ajaxserver
-            docker run --name ajaxserver -d -p 5000:5000 ghcr.io/utscc09/server-jchmach:justinDeployTest
+            docker-compose pull && docker-compose up -d

@@ -6,7 +6,7 @@ import {createHttpLink} from 'apollo-link-http'
 import {ApolloProvider} from '@apollo/react-hooks'
 
 const httpLink = createHttpLink({
-    uri: 'https://ajaxpictures.me:5000'
+    uri: 'api.ajaxpictures.me'
 })
 
 const client = new ApolloClient({
