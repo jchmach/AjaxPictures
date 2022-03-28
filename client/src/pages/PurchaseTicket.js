@@ -43,7 +43,7 @@ function PurchaseTicket(){
     }
 
     useEffect(()=>{
-        if(selected.length != 0){
+        if(selected.length !== 0){
             reserveSeats();
         }
     }, [selected])
