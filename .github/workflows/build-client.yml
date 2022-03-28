@@ -56,4 +56,7 @@ jobs:
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: docker-compose pull && docker-compose up -d
+          script: |
+            docker stop ajaxclient
+            docker rm ajaxclient
+            docker-compose pull && docker-compose up -d
