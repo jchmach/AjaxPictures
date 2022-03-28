@@ -56,8 +56,4 @@ jobs:
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: |
-            docker pull ghcr.io/utscc09/client-jchmach:justindeploytest
-            docker stop ajaxclient
-            docker rm ajaxclient
-            docker run --name ajaxclient -d -p 80:3000 ghcr.io/utscc09/client-jchmach:justinDeployTest
+          script: docker-compose pull && docker-compose up -d
