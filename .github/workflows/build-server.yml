@@ -1,4 +1,4 @@
-name: Publish Backend to GHCR
+name: Publish Backend to GHCR and redeploy 
 
 on:
   push:
@@ -48,3 +48,16 @@ jobs:
           echo VERSION=$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+
+      - name: Deploy on droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ajaxpictures.me
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            docker pull ghcr.io/utscc09/server-jchmach:justindeploytest
+            docker stop ajaxserver
+            docker rm ajaxserver
+            docker run --name ajaxserver -d -p 5000:5000 ghcr.io/utscc09/server-jchmach:justinDeployTest
