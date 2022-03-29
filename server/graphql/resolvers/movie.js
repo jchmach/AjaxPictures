@@ -1,9 +1,6 @@
-// const {UserInputError} = require('apollo-server');
-// const axios = require("axios")
 import axios from 'axios';
 import Movie from '../../models/Movie.js';
 import {UserInputError} from 'apollo-server';
-// const Movie = require('../../models/Movie');
 
 export default {
     Query: {

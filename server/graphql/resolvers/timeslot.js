@@ -1,7 +1,5 @@
-// const {UserInputError} = require('apollo-server');
 import {UserInputError} from 'apollo-server';
 import Timeslot from '../../models/timeslot.js'
-// const Timeslot = require('../../models/Timeslot');
 
 export default {
     Query: {

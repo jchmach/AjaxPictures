@@ -1,4 +1,3 @@
-// const {model, Schema} = require('mongoose');
 import mongoose from 'mongoose';
 
 const ticketSchema = new mongoose.Schema({

@@ -1,6 +1,4 @@
-//const {model, Schema} = require('mongoose');
 import mongoose from 'mongoose'
-// import model, Schema from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     username: String,

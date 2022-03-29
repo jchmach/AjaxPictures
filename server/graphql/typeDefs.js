@@ -1,4 +1,3 @@
-// const { gql } = require('apollo-server');
 import gql from 'graphql-tag';
 const gqlStr = gql`
 

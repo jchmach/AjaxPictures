@@ -1,9 +1,6 @@
-//const {AuthenticationError} = require('apollo-server');
 import {AuthenticationError} from 'apollo-server'
 import jwt from 'jsonwebtoken';
 import { SECRET } from '../config';
-// const jwt = require('jsonwebtoken');
-// const {SECRET} = require('../config');
 
 module.exports = (context) => {
     const authHeader = context.req.headers.authorization;
