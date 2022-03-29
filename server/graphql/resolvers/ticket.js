@@ -2,6 +2,7 @@ const {UserInputError} = require('apollo-server');
 
 const Ticket = require('../../models/Ticket');
 
+
 module.exports = {
     Query: {
         async ticketHistory(root, {userId}, context, info){

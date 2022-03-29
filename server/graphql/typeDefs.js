@@ -39,7 +39,7 @@ module.exports = gql`
         timeslot(movieId: String, date: String, timeSlot: String ): Timeslot
         timeslotTimes(movieId: String, date: String): [Timeslot]
         timeslotDates(movieId: String): [Timeslot]
-        ticketHistory(userId: ID!): [Ticket]
+        ticketHistory(userId: String!): [Ticket]
         ticketsByMovie(movieId: ID!): [Ticket]
         ticketsByDate(date: String): [Ticket]
         ticketsByMovieDate(movieId: ID!, date: String): [Ticket]
@@ -78,7 +78,7 @@ module.exports = gql`
     }
 
     type Ticket{
-        id: ID!
+        id: ID
         userId: String!,
         movieId: String!,
         movieTitle: String!,
