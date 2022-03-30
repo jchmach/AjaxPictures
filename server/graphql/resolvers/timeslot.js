@@ -1,9 +1,7 @@
-const {UserInputError} = require('apollo-server');
-const s = require('connect-redis');
+import {UserInputError} from 'apollo-server';
+import Timeslot from '../../models/timeslot.js'
 
-const Timeslot = require('../../models/Timeslot');
-
-module.exports = {
+export default {
     Query: {
         async timeslot(root, {movieId, date, timeSlot}, context, info){
             const slot = await Timeslot.findOne({movieId: movieId, date: date, timeSlot: timeSlot});

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import gql from "graphql-tag";
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useNavigate, useLocation } from "react-router-dom";
 import Timeslots from "../components/Timeslots";
 import MovieComponent from "../components/MovieComponent";

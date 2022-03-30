@@ -1,7 +1,5 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client';
-import { useEffect,useState } from "react";
-
 
 export default function MovieComponent(props) {
 

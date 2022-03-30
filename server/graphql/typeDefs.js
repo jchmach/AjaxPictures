@@ -1,6 +1,5 @@
-const { gql } = require('apollo-server');
-
-module.exports = gql`
+import gql from 'graphql-tag';
+const gqlStr = gql`
 
     type User{
         id:ID!
@@ -30,11 +29,7 @@ module.exports = gql`
         confirmPassword: String!
         email: String!
     }
-    # A book has a title and author
-    type Book {
-        title: String
-        author: String
-    }
+
     type Query{
         timeslot(movieId: String, date: String, timeSlot: String ): Timeslot
         timeslotTimes(movieId: String, date: String): [Timeslot]
@@ -113,3 +108,5 @@ module.exports = gql`
     }
 
 `;
+
+export default gqlStr;

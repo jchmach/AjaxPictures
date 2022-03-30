@@ -1,6 +1,6 @@
-const {model, Schema} = require('mongoose');
+import mongoose from 'mongoose';
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     MovieId:String,
     Title:String,
     Year:String,
@@ -16,4 +16,4 @@ const userSchema = new Schema({
     MetaScore:String
 });
 
-module.exports = model('Movie', userSchema);
+export default mongoose.model('Movie', userSchema);

@@ -1,6 +1,6 @@
-const {model, Schema} = require('mongoose');
+import mongoose from 'mongoose';
 
-const ticketSchema = new Schema({
+const ticketSchema = new mongoose.Schema({
     userId: String,
     movieId: String,
     movieTitle: String,
@@ -10,4 +10,4 @@ const ticketSchema = new Schema({
     seatNumber: Number
 }, {timestamps: true})
 
-module.exports = model("Ticket", ticketSchema);
+export default mongoose.model("Ticket", ticketSchema);

@@ -1,9 +1,8 @@
-const {UserInputError} = require('apollo-server');
-const axios = require("axios")
+import axios from 'axios';
+import Movie from '../../models/Movie.js';
+import {UserInputError} from 'apollo-server';
 
-const Movie = require('../../models/Movie');
-
-module.exports = {
+export default {
     Query: {
         async GetMovie(root, {Title}, context, info){
             console.log(Title)
