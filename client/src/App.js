@@ -26,7 +26,7 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/movietimeslots" element={<MovieTimeslots/>}/>
             <Route path="/purchaseticket" element={<PurchaseTicket/>}/>
-            <Route path="/movie" element={<Movie/>}/>
+            <Route path="/movie/:id" element={<Movie/>}/>
           </Routes>
         </Container>
       </Router>

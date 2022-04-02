@@ -1,14 +1,14 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client';
-import { useEffect,useState } from "react";
 
 
 export default function MovieComponent(props) {
 
     let for_adding_in_admin = "mutation Mutation($title: String) {createMovie(Title: $title) {Title}}"
+    console.log(props)
     const {onPurchasePage, navigateNext} = props;
     const { loading, error, data } = useQuery(GET_MOVIE, {
-        variables: { "title": "The Batman" },
+        variables: { "title": props.movieName},
     });
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
