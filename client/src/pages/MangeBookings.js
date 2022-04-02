@@ -6,13 +6,13 @@ import {Grid, Label, Button, Header, Divider} from 'semantic-ui-react'
 
 function ManageBookings(){
     const context = useContext(AuthContext);
-    const { loading, data} = useQuery(GET_SEATING, {
+    const { loading, error, data} = useQuery(GET_SEATING, {
         variables: {userId: context.user.id}
     })
 
     const [refund] = useMutation(DELETE_TICKET);
-    const [unreserve, {error}] = useMutation(DELETE_TIMESLOT);
-    
+    const [unreserve] = useMutation(DELETE_TIMESLOT);
+
     if (error) return (
         console.log(error)
     )
@@ -62,8 +62,9 @@ function ManageBookings(){
                             </Label>
                         </Grid.Column>
                         <Grid.Column>
-                            <Button color="instagram" onClick={() => {unreserve({variables: {movieId: ticket.movieId, date: ticket.date, timeslot: ticket.timeslot, seats: {seatRow: ticket.seatRow,seatNumber: ticket.seatNumber, id: ticket.id}}}); refund({variables: {ticketId: ticket.id}}); window.location.reload();}}>
+                            <Button color="instagram" onClick={() => {unreserve({variables: {movieId: ticket.movieId, date: ticket.date, timeslot: ticket.timeslot, seats: [{seatRow: ticket.seatRow,seatNumber: ticket.seatNumber, id: ticket.id}]}}); refund({variables: {ticketId: ticket.id}}); window.location.reload();}}>
                                 Refund Ticket
+                                {console.log(ticket.date)}
                             </Button>
                         </Grid.Column> 
                     </Grid.Row>  
