@@ -11,7 +11,17 @@ function ManageBookings(){
     })
 
     const [refund] = useMutation(DELETE_TICKET);
-    const [unreserve] = useMutation(DELETE_TIMESLOT);
+    const [unreserve] = useMutation(DELETE_TIMESLOT, {
+        onError(err){
+            console.log(
+
+                "afsasfafaa"
+            )
+            console.log(this.variables)
+            console.log(err);
+        }
+    }
+        );
 
     if (error) return (
         console.log(error)
@@ -62,7 +72,13 @@ function ManageBookings(){
                             </Label>
                         </Grid.Column>
                         <Grid.Column>
-                            <Button color="instagram" onClick={() => {unreserve({variables: {movieId: ticket.movieId, date: ticket.date, timeslot: ticket.timeslot, seats: [{seatRow: ticket.seatRow,seatNumber: ticket.seatNumber, id: ticket.id}]}}); refund({variables: {ticketId: ticket.id}}); window.location.reload();}}>
+                            <Button color="instagram" onClick={() => {
+                                console.log([{seatRow: ticket.seatRow,seatNumber: ticket.seatNumber, id: ticket.seatRow + ticket.seatNumber}])
+                                let variables = {movieId: ticket.movieId, date: ticket.date, timeslot: ticket.timeSlot, seats: [{seatRow: ticket.seatRow,seatNumber: ticket.seatNumber, id: ticket.seatRow.toLowerCase() + ticket.seatNumber}]}
+                                console.log(variables);
+                                unreserve({variables: variables}); 
+                                refund({variables: {ticketId: ticket.id}});                                 
+                                }}>
                                 Refund Ticket
                                 {console.log(ticket.date)}
                             </Button>
@@ -112,7 +128,7 @@ const DELETE_TIMESLOT = gql`
         $date: String!
         $timeslot: String!
     ) {
-        unreserve(
+        unreserveSeats(
             seatReservations:{
                 seats: $seats
                 movieId: $movieId
