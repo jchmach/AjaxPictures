@@ -10,22 +10,8 @@ function ManageBookings(){
         variables: {userId: context.user.id}
     })
 
-    const [refund] = useMutation(DELETE_TICKET);
-    const [unreserve] = useMutation(DELETE_TIMESLOT, {
-        onError(err){
-            console.log(
-
-                "afsasfafaa"
-            )
-            console.log(this.variables)
-            console.log(err);
-        }
-    }
-        );
-
-    if (error) return (
-        console.log(error)
-    )
+    const  [refund] = useMutation(DELETE_TICKET);
+    const [unreserve] = useMutation(DELETE_TIMESLOT);
     
     if (loading) return 'Loading...';
 
@@ -72,15 +58,14 @@ function ManageBookings(){
                             </Label>
                         </Grid.Column>
                         <Grid.Column>
-                            <Button color="instagram" onClick={() => {
+                            <Button color="instagram" onClick={async () => {
                                 console.log([{seatRow: ticket.seatRow,seatNumber: ticket.seatNumber, id: ticket.seatRow + ticket.seatNumber}])
                                 let variables = {movieId: ticket.movieId, date: ticket.date, timeslot: ticket.timeSlot, seats: [{seatRow: ticket.seatRow,seatNumber: ticket.seatNumber, id: ticket.seatRow.toLowerCase() + ticket.seatNumber}]}
-                                console.log(variables);
-                                unreserve({variables: variables}); 
-                                refund({variables: {ticketId: ticket.id}});                                 
+                                await unreserve({variables: variables}); 
+                                await refund({variables: {ticketId: ticket.id}});
+                                window.location.reload();                                
                                 }}>
                                 Refund Ticket
-                                {console.log(ticket.date)}
                             </Button>
                         </Grid.Column> 
                     </Grid.Row>  
