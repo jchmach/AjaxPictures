@@ -15,6 +15,16 @@ export default {
             const movie = await Movie.find({Title: Title, Year:Year});
             if (!movie.length) throw new UserInputError('No movie with that title exists in DB ' + Title);
             return movie[0]
+        },
+        async getMovieOMDB(root, {movieTitle}, context, info){
+            const resp = await axios.get("https://www.omdbapi.com/?s=" 
+                + movieTitle
+            + "&type=movie&apikey=362bd303");
+            if (resp.data.Response === "False"){
+                throw new UserInputError(resp.data.Error);
+            }
+            const results = resp.data.Search
+            return results
         }
     },
     Mutation: {

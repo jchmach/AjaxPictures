@@ -22,7 +22,10 @@ const gqlStr = gql`
         Poster:String
         imdb:String
         MetaScore:String
-    }
+    } 
+
+
+
     input RegisterInput{
         username: String!
         password: String!
@@ -40,6 +43,7 @@ const gqlStr = gql`
         ticketsByMovieDate(movieId: ID!, date: String): [Ticket]
         GetMovie(Title: String): Movie
         GetMovieYear(Title: String, Year: String): Movie
+        getMovieOMDB(movieTitle: String): [truncatedMovie]
     }
     type Mutation{
         register(registerInput: RegisterInput): User!
@@ -105,6 +109,12 @@ const gqlStr = gql`
         number: String
         id: String
         isReserved: Boolean
+    }
+
+    type truncatedMovie{
+        Title:String
+        Year:String
+        Poster:String
     }
 
 `;
