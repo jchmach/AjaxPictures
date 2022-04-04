@@ -44,6 +44,7 @@ const gqlStr = gql`
         GetMovie(Title: String): Movie
         GetMovieYear(Title: String, Year: String): Movie
         getMovieOMDB(movieTitle: String): [truncatedMovie]
+        getLocalMovieList(search: String): [Movie]
     }
     type Mutation{
         register(registerInput: RegisterInput): User!
