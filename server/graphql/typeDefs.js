@@ -73,7 +73,7 @@ const gqlStr = gql`
     }
 
     type Ticket{
-        id: ID!
+        id: ID
         userId: String!,
         movieId: String!,
         movieTitle: String!,
