@@ -43,7 +43,7 @@ function AdminSearch(props){
             <List>
                 {movieList.map((movie) => (
                     <List.Item>
-                        <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={true}></MovieListItem>
+                        <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={true} clickMovie={clickMovie}></MovieListItem>
                     </List.Item>
                 ))}
             </List>

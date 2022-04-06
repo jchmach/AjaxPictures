@@ -30,6 +30,7 @@ function App() {
             <Route path="/purchaseticket" element={<PurchaseTicket/>}/>
             <Route path="/movie" element={<Movie/>}/>
             <Route path="/adminactions" element={<AdminActions/>}/>
+            <Route path="/adminmovie" element={<AdminMovie/>}/>
           </Routes>
         </Container>
       </Router>

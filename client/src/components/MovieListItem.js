@@ -8,7 +8,7 @@ function MovieListItem(props){
         event.stopPropagation();
     }
     return(
-        <div className="Movie_Item" onClick={()=> console.log("Click Movie")}>
+        <div className="Movie_Item" onClick={clickMovie}>
             <div>
                 <img id="Poster" src={poster}></img>
             </div>
