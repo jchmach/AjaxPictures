@@ -40,7 +40,7 @@ export default {
         async register(
             _,
             {
-                registerInput: {username, email, password, confirmPassword}
+                registerInput: {username, email, password, confirmPassword, preferredGenre1, preferredGenre2, preferredGenre3}
             }, 
             context, 
             info)
@@ -66,7 +66,10 @@ export default {
                 email,
                 username,
                 password,
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                preferredGenre1,
+                preferredGenre2,
+                preferredGenre3
             })
             const res = await newUser.save();
             const token = genToken(res);
