@@ -9,7 +9,10 @@ function genToken(user){
     return jwt.sign({
         id: user.id,
         email: user.email,
-        username: user.username
+        username: user.username,
+        preferredGenre1: user.preferredGenre1,
+        preferredGenre2: user.preferredGenre2,
+        preferredGenre3: user.preferredGenre3
     }, SECRET, {expiresIn: '2h'});
 }
 
