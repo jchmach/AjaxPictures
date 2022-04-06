@@ -64,6 +64,7 @@ function PurchaseTicket(){
             <Button id="Purchase_Return" onClick={goBack}>Back</Button>
             <Label className="Purchase_TimeslotInfo">{params.state.movieData.date}</Label>
             <Label className="Purchase_TimeslotInfo">{params.state.movieData.timeslot}</Label>
+            <Button onClick={() => console.log(context.user)}></Button>
 
         </div>
         <div id="Purchase_Container">

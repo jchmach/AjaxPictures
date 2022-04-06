@@ -26,6 +26,12 @@ function MenuBar() {
           as={Link}
           to="/Movie"
         />
+        {user.username === "admin"? <Menu.Item 
+          name='Manage'
+          onClick={handleItemClick}
+          as={Link}
+          to="/AdminActions"
+        />: null}
         <Menu.Menu position='right'>
           <Menu.Item
             name='logout'

@@ -1,0 +1,25 @@
+#Poster{
+    width: 150px;
+    height: 200px;
+}
+
+.Movie_Item{
+    display: flex;
+    flex-direction: row;
+    border-style:solid;
+    border-color:darkgray;
+}
+
+.Movie_Info{
+    font-size:xx-large;
+}
+
+.Movie_Info_Container{
+    display: flex;
+    padding-top: 90px;
+    padding-left: 30px;
+}
+
+.Movie_Info_Year{
+    padding-left: 10px;
+}
