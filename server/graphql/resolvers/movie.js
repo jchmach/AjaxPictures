@@ -30,6 +30,18 @@ export default {
             const movie = await Movie.find({Title: {"$regex": search}});
             if (!movie.length) throw new UserInputError("Movie " + search +" does not exist in database")
             return movie
+        },
+        async GetMovies(root,{}, context, info){
+            const movies = await Movie.find();
+            if (!movies.length) throw new UserInputError('No movie with that title exists in DB ' + Title);
+            return movies
+        },
+        async GetMoviesGenre(root,{Genre}, context, info){
+            console.log(Genre)
+            const movies = await Movie.find({Genre: Genre});
+            console.log(movies)
+            if (!movies.length) throw new UserInputError('No movie with that title exists in DB ' + Title);
+            return movies
         }
     },
     Mutation: {

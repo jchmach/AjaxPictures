@@ -42,6 +42,8 @@ const gqlStr = gql`
         ticketsByDate(date: String): [Ticket]
         ticketsByMovieDate(movieId: ID!, date: String): [Ticket]
         GetMovie(Title: String): Movie
+        GetMovies: [Movie]
+        GetMoviesGenre(Genre: String): [Movie]
         GetMovieYear(Title: String, Year: String): Movie
         getMovieOMDB(movieTitle: String): [truncatedMovie]
         getLocalMovieList(search: String): [Movie]
@@ -78,7 +80,7 @@ const gqlStr = gql`
     }
 
     type Ticket{
-        id: ID!
+        id: ID
         userId: String!,
         movieId: String!,
         movieTitle: String!,

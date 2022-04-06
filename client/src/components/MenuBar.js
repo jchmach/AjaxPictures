@@ -34,9 +34,19 @@ function MenuBar() {
         />: null}
         <Menu.Menu position='right'>
           <Menu.Item
+            name='bookings'
+            active={activeItem === 'bookings'}
+            onClick={handleItemClick}
+            as={Link}
+            to="/managebookings"
+          />
+
+          <Menu.Item
             name='logout'
             active={activeItem === 'login'}
             onClick={logout}
+            as={Link}
+            to="/"
           />
         </Menu.Menu>  
       </Menu>
