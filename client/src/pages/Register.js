@@ -55,9 +55,7 @@ function Register(){
             text: 'Horror',
             value: 'Horror',
 
-        },    
-        {   
-    }
+        }, 
     ]
     let navigate = useNavigate();
     const [errors, setErrors] = useState ({})
@@ -72,13 +70,16 @@ function Register(){
     })
     const genres = []
     const genre = [{genre1:"", genre2:"", genre3:""}]
+
     const onChange = (event) =>{
         setValues({...values,[event.target.name]: event.target.value});
     }
+
     const onChange2 = (event, result) => {
         const { name, value } = result || event.target;
         setValues({ ...values, [name]: value });
-      };
+    };
+     
     const [addUser, { loading}] = useMutation(REGISTER_USER, {
         update(proxy, {data: {register: userData}}){
             context.login(userData);
@@ -95,7 +96,6 @@ function Register(){
         //send mutation
         addUser();
     };
-
 
     return(
         <div className="form-container">
