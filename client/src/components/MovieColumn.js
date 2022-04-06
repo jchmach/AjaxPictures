@@ -2,6 +2,7 @@ import React from 'react'
 import { gql, useQuery } from '@apollo/client';
 import "../styles/Movie.css";
 import { Segment, Card, Header } from 'semantic-ui-react';
+import MovieCard from './MovieCard';
 
 
 export default function MovieCoulmn(props) {
@@ -30,13 +31,7 @@ export default function MovieCoulmn(props) {
         console.log(movie_list[0].Poster)
     }
     const movieItems = movie_list.map((movie) =>  
-        <a href={`/Movie/${movie.Title}`}>
-            <div class="ui card">
-                <div className="img">
-                    <img src={movie.Poster}></img>
-                </div>
-            </div> 
-        </a>
+        <MovieCard Title={movie.Title} Poster={movie.Poster}></MovieCard>
     );  
     return (
         <div class="ui container">

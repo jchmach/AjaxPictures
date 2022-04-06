@@ -1,7 +1,14 @@
 import React from 'react'
+import "../styles/Movie.css";
 
-export default function MovieCard() {
+export default function MovieCard(props) {
   return (
-    <div>MovieCard</div>
+        <a href={`/Movie/${props.Title}`}>
+            <div class="ui card">
+                <div className="image">
+                    <img src={props.Poster}></img>
+                </div>
+            </div> 
+        </a>
   )
 }
