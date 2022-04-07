@@ -23,7 +23,7 @@ export default {
         },
         async GetMoviesGenre(root,{Genre}, context, info){
             console.log(Genre)
-            const movies = await Movie.find({Genre: Genre});
+            const movies = await Movie.find({Genre: {"$regex": Genre}});
             console.log(movies)
             if (!movies.length) throw new UserInputError('No movie with that title exists in DB ' + Title);
             return movies
