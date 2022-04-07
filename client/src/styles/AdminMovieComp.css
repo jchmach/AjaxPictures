@@ -5,4 +5,30 @@
 
 .Movie_Header{
     font-size: xx-large;
+    margin-bottom: 10px;
+}
+
+.Movie_Label_Title{
+    margin-right: 10px;
+    background-color: cornflowerblue;
+    padding: 5px;
+    border-style: solid;
+    border-radius: 4px;
+}
+
+.Movie_Label_Content{
+    white-space: pre-line;
+}
+
+#Movie_Info{
+    margin-left: 10px;
+}
+
+.Movie_Label{
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#Movie_Plot_Container{
+    margin-top: 5px;
 }

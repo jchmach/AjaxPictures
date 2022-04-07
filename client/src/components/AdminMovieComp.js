@@ -60,49 +60,51 @@ function AdminMovieComp(props){
         <div>
             <div id="Movie_Info_Container">
                 <img src={movie.Poster}></img>
-                <div>
-                    <div>
+                <div id="Movie_Info">
+                    <div className="Movie_Label">
                         <label className="Movie_Header">{movie.Title}</label>
                         <label className="Movie_Header"> ({year})</label>
                     </div>
-                    <div>
-                        <label>Director</label>
-                        <label>{movie.Director}</label>
+                    <div className="Movie_Label">
+                        <label className="Movie_Label_Title">Director</label>
+                        <label className="Movie_Label_Content">{movie.Director}</label>
                     </div>
-                    <div>
-                        <label>Plot</label>
-                        <label>{movie.Plot}</label>
+                    <div className="Movie_Label">
+                        <label className="Movie_Label_Title">Plot</label>
+                        <div id="Movie_Plot_Container">
+                            <label className="Movie_Label_Content">{movie.Plot}</label>
+                        </div>
                     </div>
-                    <div>
-                        <label>Genre</label>
-                        <label>{movie.Genre}</label>
+                    <div className="Movie_Label">
+                        <label className="Movie_Label_Title">Genre</label>
+                        <label className="Movie_Label_Content">{movie.Genre}</label>
                     </div>
-                    <div>
-                        <label>Released</label>
-                        <label>{movie.Released}</label>
+                    <div className="Movie_Label">
+                        <label className="Movie_Label_Title">Released</label>
+                        <label className="Movie_Label_Content">{movie.Released}</label>
                     </div>
-                    <div>
-                        <label>Language</label>
-                        <label>{movie.Language}</label>
+                    <div className="Movie_Label">
+                        <label className="Movie_Label_Title">Language</label>
+                        <label className="Movie_Label_Content">{movie.Language}</label>
                     </div>
-                    <div>
-                        <label>Runtime</label>
-                        <label>{movie.Runtime}</label>
+                    <div className="Movie_Label">
+                        <label className="Movie_Label_Title">Runtime</label>
+                        <label className="Movie_Label_Content">{movie.Runtime}</label>
                     </div>
-                    <div>
-                        <label>IMDB Score</label>
-                        <label>{movie.imdb}</label>
+                    <div className="Movie_Label">
+                        <label className="Movie_Label_Title">IMDB Score</label>
+                        <label className="Movie_Label_Content">{movie.imdb}</label>
                     </div>
-                    <div>
-                        <label>Metacritic Score</label>
-                        <label>{movie.MetaScore}</label>
+                    <div className="Movie_Label">
+                        <label className="Movie_Label_Title">Metacritic Score</label>
+                        <label className="Movie_Label_Content">{movie.MetaScore}</label>
                     </div>
                 </div>
             </div>
             
             <Button onClick={goBack}>Back</Button>
-                <Button onClick={deleteMovie}>Delete</Button>
-                <Popup trigger={<Button>Add</Button>} flowing hoverable>
+                <Button onClick={deleteMovie}>Delete Movie</Button>
+                <Popup trigger={<Button>Add Timeslot</Button>} flowing hoverable>
                     <Calendar minDate={today} maxDate={twoWeeks} onClickDay={calendarClick}> </Calendar>
                 </Popup>
                 {dateSelected? <AdminTimeslots movieId={movie.ID}  movieTitle={movie.Title} date={date}></AdminTimeslots> : null}
