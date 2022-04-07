@@ -32,3 +32,13 @@
 #Movie_Plot_Container{
     margin-top: 5px;
 }
+
+#Add_Movie{
+    background-color: white;
+    color: cornflowerblue;
+    border-style: solid;
+}
+
+#Admin_Actions{
+    margin-top: 10px;
+}

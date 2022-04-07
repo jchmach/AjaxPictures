@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import {useQuery, useMutation} from '@apollo/client'
 import AdminTimeslots from "./AdminTimeslots";
 import '../styles/AdminMovieComp.css'
+import 'react-calendar/dist/Calendar.css'
 function AdminMovieComp(props){
     const navigation = useNavigate()
     const{title, year} = props;
@@ -101,13 +102,15 @@ function AdminMovieComp(props){
                     </div>
                 </div>
             </div>
-            
-            <Button onClick={goBack}>Back</Button>
-                <Button onClick={deleteMovie}>Delete Movie</Button>
-                <Popup trigger={<Button>Add Timeslot</Button>} flowing hoverable>
+            <div id="Admin_Actions">
+                <Button id="Go_Back" onClick={goBack}>Back</Button>
+                <Button id="Delete_Movie" onClick={deleteMovie}>Delete Movie</Button>
+                <Popup trigger={<Button id="Add_Movie">Add Date</Button>} flowing hoverable>
                     <Calendar minDate={today} maxDate={twoWeeks} onClickDay={calendarClick}> </Calendar>
                 </Popup>
                 {dateSelected? <AdminTimeslots movieId={movie.ID}  movieTitle={movie.Title} date={date}></AdminTimeslots> : null}
+            </div>
+
         </div>
     )
 

@@ -15,3 +15,55 @@
     width: 100px;
     justify-content: center;
 }
+
+
+.Admin_Timeslot_Label{
+    font-size: large;
+}
+
+#Delete_Timeslot{
+    margin-left: auto;
+    background-color: white;
+    border-style: solid;
+    border-color: red;
+    color: red;
+}
+
+#Delete_Timeslot:hover{
+    margin-left: auto;
+    background-color: red;
+    border-style: solid;
+    border-color: white;
+    color: white;
+}
+
+#Timeslot_Header{
+    display: flex;
+}
+
+#Timeslot{
+    margin-top: 10px;
+    width: 100%;
+    overflow: hidden;
+}
+
+#Timeslot_Container{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#Add_Timeslot{
+    margin-top: 10px;
+    background-color: white;
+    color: cornflowerblue;
+    border-style: solid;
+    border-color: cornflowerblue;
+}
+
+#Add_Timeslot:hover{
+    margin-top: 10px;
+    background-color: cornflowerblue;
+    color: white;
+    border-style: solid;
+    border-color: cornflowerblue;
+}

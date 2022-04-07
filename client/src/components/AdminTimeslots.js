@@ -116,10 +116,12 @@ function AdminTimeslots (props){
 
 
     return(
-        <div>
-            <label>{date}</label>
-            <label>Click on a timeslot to delete it</label>
-            <Button onClick={deleteDateDB}>Delete All Timeslots</Button>
+        <div id="Timeslot">
+            <div id="Timeslot_Header">
+                <label className="Admin_Timeslot_Label">{date}</label>
+                <Button id="Delete_Timeslot" onClick={deleteDateDB}>Delete All Timeslots</Button>
+            </div>
+            <label className="Admin_Timeslot_Label">Click on a timeslot to delete it</label>
             <div id="Timeslot_Container">
                 <Grid stackable columns={5}>
                     {slots.map((timeslot) => (
@@ -132,7 +134,7 @@ function AdminTimeslots (props){
             <Modal onClose={() => setOpen(false)} 
                 onOpen={() => setOpen(true)}
                 open={open}
-                trigger={<Button>Add Timeslot</Button>}>
+                trigger={<Button id="Add_Timeslot">Add Timeslot</Button>}>
 
                 <Modal.Header>Add a timeslot</Modal.Header>
                 <Modal.Content>
