@@ -6,12 +6,11 @@ export default function MovieComponent(props) {
     let for_adding_in_admin = "mutation Mutation($title: String) {createMovie(Title: $title) {Title}}"
     const {onPurchasePage, navigateNext} = props;
     const { loading, error, data } = useQuery(GET_MOVIE, {
-        variables: { "title": "The Batman" },
+        variables: { "title": props.movieName},
     });
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
 
-    console.log(data.GetMovie)
     const movieItem = data.GetMovie
 
   return (
@@ -73,16 +72,16 @@ export default function MovieComponent(props) {
         <p></p>
         <p></p>
         <p></p>
-        {onPurchasePage? null : <button className="blue massive ui button" onClick={() => navigateNext(movieItem.id)}>
+        {onPurchasePage? null : <button className="blue massive ui button" onClick={() => navigateNext(movieItem.id, movieItem.Title)}>
                                     Buy Ticket
                                 </button>}
 
         </div>
+        </div>
     </div>
-  </div>
-  <div className="ui vertical divider">
-  </div>
-</div>
+    <div className="ui vertical divider">
+    </div>
+    </div>
   )
 }
 

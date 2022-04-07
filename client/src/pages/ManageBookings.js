@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import React, { useState, useContext } from "react";
 import {AuthContext} from '../context/auth'
@@ -6,8 +6,30 @@ import {Grid, Label, Button, Header, Divider} from 'semantic-ui-react'
 
 function ManageBookings(){
     const context = useContext(AuthContext);
-    const { loading, error, data} = useQuery(GET_SEATING, {
-        variables: {userId: context.user.id}
+    const [tickets, setTickets] = useState({
+        ticketHistory: []
+    })
+
+    const {loading, data, error} = useQuery(GET_SEATING, {
+        fetchPolicy: "network-only",
+        variables: {userId: context.user.id},
+        onCompleted(data){
+            setTickets(data)
+        }
+    })
+
+
+    const [manual] = useLazyQuery(GET_SEATING, {
+        variables: {userId: context.user.id},
+        onCompleted(data){
+            setTickets(data)
+        },
+        onError(err){
+            if (err.message.includes("No ticket history found for userId")){
+                setTickets({ticketHistory: []})
+            }
+        },
+        fetchPolicy: "network-only"
     })
 
     const  [refund] = useMutation(DELETE_TICKET);
@@ -15,10 +37,8 @@ function ManageBookings(){
     
     if (loading) return 'Loading...';
 
-    if (error) return (
+    if (error || !tickets.ticketHistory.length) return (
         <Header textAlign="center" size="huge">
-            {console.log(context.user.id)}
-            {console.log(JSON.stringify(error, null, 2))}
             No Bookings Found
         </Header>
     )
@@ -32,7 +52,7 @@ function ManageBookings(){
                 *
             </Divider>
             <Grid relaxed container={true} divided={"vertically"}>
-                {data.ticketHistory.map(ticket => (
+                {tickets.ticketHistory.map(ticket => (
                     <Grid.Row columns={6} >
                         <Grid.Column>
                             <Label color="blue">
@@ -65,7 +85,7 @@ function ManageBookings(){
                                 let variables = {movieId: ticket.movieId, date: ticket.date, timeslot: ticket.timeSlot, seats: [{seatRow: ticket.seatRow,seatNumber: ticket.seatNumber, id: ticket.seatRow.toLowerCase() + ticket.seatNumber}]}
                                 await unreserve({variables: variables}); 
                                 await refund({variables: {ticketId: ticket.id}});
-                                window.location.reload();                                
+                                manual();                        
                                 }}>
                                 Refund Ticket
                             </Button>

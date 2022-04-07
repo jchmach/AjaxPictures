@@ -1,14 +1,43 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import MovieCoulmn from "../components/MovieColumn";
+import {AuthContext} from '../context/auth'
 
 function Home(){
-
-    return(
+    const context = useContext(AuthContext);
+    let genre = ""
+    if (context.user){
+        genre = context.user.preferredGenre1
+        console.log(genre)
+    }
+    const homePage = context.user ? (
         <div>
+            <h1 class="ui header">Suggested Movies</h1>
             <h1>
-                Home Page
+                <MovieCoulmn genre={genre}></MovieCoulmn>
+            </h1>
+            <h1 class="ui header">Comedy</h1>
+            <h1>
+                <MovieCoulmn genre={"Comedy"}></MovieCoulmn>
+            </h1>
+            <h1 class="ui header">Romance</h1>
+            <h1>
+                <MovieCoulmn genre={"Drama, Romance"}></MovieCoulmn>
             </h1>
         </div>
-    )
+    ) :
+      (
+        <div>
+            <h1 class="ui header">Comedy</h1>
+            <h1>
+                <MovieCoulmn genre={"Comedy"}></MovieCoulmn>
+            </h1>
+            <h1 class="ui header">Romance</h1>
+            <h1>
+                <MovieCoulmn genre={"Drama, Romance"}></MovieCoulmn>
+            </h1>
+        </div>
+    );
+    return homePage
 }
 
 export default Home;
