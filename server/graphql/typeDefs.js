@@ -47,6 +47,8 @@ const gqlStr = gql`
         GetMovieYear(Title: String, Year: String): Movie
         getMovieOMDB(movieTitle: String): [truncatedMovie]
         getLocalMovieList(search: String): [Movie]
+        unusedTimeslots(movieId: String, date: String): [String]
+        unusedTheaters(date: String, timeslot: String): [Int]
     }
     type Mutation{
         register(registerInput: RegisterInput): User!

@@ -17,6 +17,27 @@ export default {
             const slots = await Timeslot.find({movieId: movieId});
             if (!slots.length) throw new UserInputError('No dates found for movie: ' + movieId);
             return slots;
+        },
+        async unusedTimeslots(root, {movieId, date}, context, info){
+            const dates = ["10:00 AM",
+                "12:00 PM",
+                "3:00 PM",
+                "5:00 PM",
+                "7:00 PM",
+                "9:00 PM",
+                "11:00 PM"]				
+            const slots = await Timeslot.find({movieId: movieId, date: date});
+            var timeslots = slots.map(slot => slot.timeSlot);
+            var results = dates.filter(date => !timeslots.includes(date));
+            return results;
+        },
+        async unusedTheaters(root, {date, timeslot}, context, info){
+            var theaters = Array.from(Array(12).keys());
+            theaters = theaters.map(number => number + 1);
+            const usedSlots = await Timeslot.find({timeSlot: timeslot, date: date});
+            var usedTheaters = usedSlots.map(slot => slot.theater);
+            var results = theaters.filter(theater => !usedTheaters.includes(theater));
+            return results;
         }
     },
     Mutation: {
