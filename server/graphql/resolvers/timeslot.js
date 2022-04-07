@@ -1,6 +1,6 @@
 import {UserInputError} from 'apollo-server';
 import Timeslot from '../../models/timeslot.js'
-
+import Ticket from '../../models/ticket.js';
 export default {
     Query: {
         async timeslot(root, {movieId, date, timeSlot}, context, info){
@@ -58,6 +58,15 @@ export default {
             return Timeslot.create({movieId: movieId, movieTitle: movieTitle, theater: theater, date: date, timeSlot: timeSlot, seating: seating, availableSeats: 213});
         },
         async removeTimeslot (root, {movieId, date, timeSlot}, context, info){
+            const current = new Date();
+            const sentDate = new Date(date + " " + timeSlot);
+            // Check if the to be deleted timeslot is in the future, if so remove all tickets bought for this date
+            if (sentDate > current){
+                const tickets = await Ticket.find({movieId: movieId, date: date, timeSlot: timeSlot})
+
+                await Ticket.deleteMany({movieId: movieId, date: date, timeSlot: timeSlot})
+            }
+
             return Timeslot.deleteOne({movieId: movieId, date: date, timeSlot: timeSlot});
         },
         async reserveSeats (root, {seatReservations: {seats, movieId, date, timeSlot}}, context, info){
@@ -87,7 +96,30 @@ export default {
             const availableSeats = slot.availableSeats - seats.length;
             // Update the timeslot with the new seating plan
             return Timeslot.updateOne({movieId: movieId, date: date, timeSlot: timeSlot}, {seating: seating, availableSeats: availableSeats});
-        }
+        },
+        async removeDate (root, {movieId, date}, context, info){
+            const current = new Date();
+            const sentDate = new Date(date);
+            // Check if the to be deleted date is in the future, if so remove all tickets bought for this date
 
+            if (sentDate > current){
+                await Ticket.deleteMany({movieId: movieId, date: date})
+            } // Check on same date; if its the same we have to remove only tickets for showings that haven't aired yet
+            else if (sentDate.toDateString() === current.toDateString()){
+                var dates = ["10:00 AM",
+                "12:00 PM",
+                "3:00 PM",
+                "5:00 PM",
+                "7:00 PM",
+                "9:00 PM",
+                "11:00 PM"]	
+                var dateStrings = dates.map(time => new Date(date + " "+ time))
+                var futureTimes = dateStrings.filter(date => date > current)
+                dates = futureTimes.map(date => date.toLocaleTimeString("en-CA", {hour: "numeric", minute:"numeric", hour12: true}))
+                dates = dates.map(time => time.toUpperCase().replaceAll(".", ""))          
+                await Ticket.deleteMany({movieId: movieId, date: date, timeSlot: {"$in": dates}})
+            }
+            return (await Timeslot.deleteMany({movieId: movieId, date: date})).deletedCount;
+        }
     }
 }

@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import gql from "graphql-tag";
 import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
 import { Button, Dropdown, Grid, Modal, Segment } from 'semantic-ui-react';
-import '../styles/Timeslot.css'
+import '../styles/AdminTimeslot.css'
 
 function AdminTimeslots (props){
     const {movieId, movieTitle, date, deleteTimeslot} = props;
@@ -85,7 +85,7 @@ function AdminTimeslots (props){
                 <Grid stackable columns={5}>
                     {slots.map((timeslot) => (
                         <Grid.Column key={timeslot} width={2}>
-                            <Segment id="Timeslot_grid"onClick={() => deleteTimeslot(movieId, date, timeslot)}>{timeslot}</Segment>
+                            <Segment id="Admin_Timeslot_grid"onClick={() => deleteTimeslot(movieId, date, timeslot)}>{timeslot}</Segment>
                         </Grid.Column>
                     ))}
                 </Grid>

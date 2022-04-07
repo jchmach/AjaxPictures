@@ -1,0 +1,17 @@
+#Admin_Timeslot_grid{
+    margin-top: 10px;
+    border: 2px;
+    border-style: solid;
+    border-color: red;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+#Admin_Timeslot_grid:hover{
+    margin-top: 10px;
+    background-color: red;
+    color: white;
+    width: 100px;
+    justify-content: center;
+}
