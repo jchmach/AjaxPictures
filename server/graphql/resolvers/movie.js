@@ -46,9 +46,8 @@ export default {
             const mov = await axios.get("https://www.omdbapi.com/?t=" 
                             + Title
                             + "&apikey=362bd303")
-            movie = mov.data
-            console.log(movie.Title)
-            result_movie = {
+            const movie = mov.data
+            const result_movie = {
                 Title: movie.Title,
                 Year: movie.Year,
                 Plot: movie.Plot,
@@ -70,11 +69,9 @@ export default {
             + Title + "&y="
             + Year
             + "&apikey=362bd303"
-            console.log(path)
             const mov = await axios.get(path)
-            movie = mov.data
-            console.log(movie.Title)
-            result_movie = {
+            const movie = mov.data
+            const result_movie = {
                 Title: movie.Title,
                 Year: movie.Year,
                 Plot: movie.Plot,

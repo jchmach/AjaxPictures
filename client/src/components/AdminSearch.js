@@ -52,11 +52,11 @@ function AdminSearch(props){
             <List>
                 { searchExisting? filteredList.map((movie) => (
                     <List.Item>
-                        <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={true} clickMovie={clickMovie}></MovieListItem>
+                        <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={searchExisting} clickMovie={clickMovie}></MovieListItem>
                     </List.Item>
                 )) : movieList.map((movie) => (
                     <List.Item>
-                        <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={true} clickMovie={clickMovie}></MovieListItem>
+                        <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={searchExisting} clickMovie={clickMovie}></MovieListItem>
                     </List.Item>
                 ))}
             </List>
