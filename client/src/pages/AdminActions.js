@@ -8,11 +8,7 @@ import AdminSearch from "../components/AdminSearch";
 function AdminActions(){
     const navigation = useNavigate()
     const clickMovie = (title, year) => {
-<<<<<<< HEAD
         navigation('/adminmovie', {
-=======
-        navigate('/adminmovie', {
->>>>>>> 67d070f (Implemented admin movie searching for new movie)
             state:{
                 title,
                 year
@@ -24,11 +20,7 @@ function AdminActions(){
         <div>
             <Button>Add new</Button>
             <Button>Manage</Button>
-<<<<<<< HEAD
             <AdminSearch searchExisting={true} clickMovie={clickMovie}></AdminSearch>
-=======
-            <AdminSearch searchExisting={true}></AdminSearch>
->>>>>>> 67d070f (Implemented admin movie searching for new movie)
 
         </div>
 

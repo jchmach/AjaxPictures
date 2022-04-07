@@ -23,9 +23,9 @@ export default {
         async createTimeslot (root, {movieId, movieTitle, theater, date, timeSlot}, context, info) {
             const seating = [];
             for (let i = 1; i < 14; i++){
-                row = [];
-                rowLetter = String.fromCharCode(i + 96);
-                seats = 17;
+                var row = [];
+                var rowLetter = String.fromCharCode(i + 96);
+                var seats = 17;
                 if (i < 3){
                     seats = 13
                 }
