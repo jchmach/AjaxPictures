@@ -2,14 +2,28 @@ import { Button, Popup } from "semantic-ui-react";
 import Calendar from 'react-calendar'
 import { useState } from "react";
 import gql from "graphql-tag";
-import {useQuery} from '@apollo/client'
+import { useNavigate } from "react-router";
+import {useQuery, useMutation} from '@apollo/client'
 import AdminTimeslots from "./AdminTimeslots";
 
 function AdminMovieComp(props){
+    const navigation = useNavigate()
     const{title, year} = props;
     const [movie, setMovie] = useState({});
     const [date, setDate] = useState("");
     const [dateSelected, setSelected] = useState(false);
+
+    const [deleteMovieDB] = useMutation(DELETE_MOVIE, {
+        variables: {id: movie.ID},
+        onCompleted(){
+            goBack()
+        }
+    })
+
+    const goBack = () => {
+        navigation(-1);
+    }
+
     useQuery(LOCAL_MOVIE, {
         variables: {movieTitle: title, year: year},
         onCompleted(data){
@@ -37,6 +51,11 @@ function AdminMovieComp(props){
     const today = new Date();
     const twoWeeks = new Date();
     twoWeeks.setDate(twoWeeks.getDate() + 14)
+
+    const deleteMovie = () => {
+        deleteMovieDB()
+    }
+
     return (
         <div>
         <img src={movie.Poster}></img>
@@ -77,7 +96,8 @@ function AdminMovieComp(props){
                 <label>Metacritic Score</label>
                 <label>{movie.MetaScore}</label>
             </div>
-            <Button>Delete</Button>
+            <Button onClick={goBack}>Back</Button>
+            <Button onClick={deleteMovie}>Delete</Button>
             <Popup trigger={<Button>Add</Button>} flowing hoverable>
                 <Calendar minDate={today} maxDate={twoWeeks} onClickDay={calendarClick}> </Calendar>
             </Popup>
@@ -116,8 +136,12 @@ const LOCAL_MOVIE = gql`
     }
 `
 
-// const REMOVE_MOVIE = gql`
-//     mutation removeMovie(
-
-//     )
-// `
+const DELETE_MOVIE = gql`
+    mutation removeMovie(
+        $id: String
+    ) {
+        removeMovie(
+            movieId: $id
+        )
+    }
+`
