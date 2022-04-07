@@ -115,3 +115,9 @@ const LOCAL_MOVIE = gql`
         }
     }
 `
+
+// const REMOVE_MOVIE = gql`
+//     mutation removeMovie(
+
+//     )
+// `

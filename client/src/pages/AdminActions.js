@@ -16,12 +16,21 @@ function AdminActions(){
         });
     }
 
+    const [existing, setExisting] = useState(true)
+    const [showSearch, setSearch] = useState(false)
+    const addNew = () => {setExisting(false); setSearch(true)}
+    const manage = () => {setExisting(true); setSearch(true)}
+
+    const goBack = () =>{setSearch(false)}
+
     return(
         <div>
-            <Button>Add new</Button>
-            <Button>Manage</Button>
-            <AdminSearch searchExisting={true} clickMovie={clickMovie}></AdminSearch>
-
+            {showSearch? <AdminSearch searchExisting={existing} clickMovie={clickMovie} goBack={goBack}></AdminSearch> :
+                        <div>            
+                            <Button onClick={addNew}>Add new</Button>
+                            <Button onClick={manage}>Manage</Button> 
+                        </div> 
+            }
         </div>
 
     )

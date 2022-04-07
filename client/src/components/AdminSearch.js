@@ -1,19 +1,22 @@
 import React, {useEffect, useState} from 'react'
-import { gql, useLazyQuery } from '@apollo/client';
-import {Search, List, Input, Dropdown, Button, Segment} from 'semantic-ui-react'
+import { gql, useLazyQuery, useQuery } from '@apollo/client';
+import { List, Input, Button} from 'semantic-ui-react'
 import MovieListItem from './MovieListItem';
 function AdminSearch(props){
-    const {searchExisting, clickMovie} = props;
+    const {searchExisting, clickMovie, goBack} = props;
     const [inputVal, setInputVal] = useState("")
     const [query, setQuery] = useState("")
     const [movieList, setList] = useState([])
-    const [searchLocal] = useLazyQuery(LOCAL_MOVIES, {
-        fetchPolicy: 'no-cache',
-        variables: {search: query},
-        onCompleted(data){
-            setList(data.getLocalMovieList);
-        }
-    })
+    const [filteredList, setFiltered] = useState([])
+
+
+    useQuery(LOCAL_MOVIES, {
+            fetchPolicy: 'no-cache',
+            variables: {search: query},
+            onCompleted(data){
+                setFiltered(data.getLocalMovieList);
+            }
+        })
     const [searchNew] = useLazyQuery(OMDB_MOVIES, {
         fetchPolicy: 'no-cache',
         variables: {movieTitle: query},
@@ -25,8 +28,13 @@ function AdminSearch(props){
         setInputVal(data.target.value)
     }
 
+    const filter = () => {
+        var filtered = movieList.filter(movie => movie.Title.includes(query));
+        setFiltered(filtered);
+    }
+
     useEffect(() => {
-        searchNew()
+        searchExisting? filter() : searchNew()
     }, [query])
 
     const search = () => {
@@ -35,13 +43,18 @@ function AdminSearch(props){
 
     return(
         <div>
+            <Button onClick={goBack}>Back</Button>
             <div id="Search">
                 <div id="Search_icon"></div>
                 <Input  onChange={changeInput}></Input>
-                <Button disabled={!inputVal.length} onClick={() => {search()}}>Search</Button>
+                <Button disabled={!inputVal.length && !searchExisting} onClick={() => {search()}}>Search</Button>
             </div>
             <List>
-                {movieList.map((movie) => (
+                { searchExisting? filteredList.map((movie) => (
+                    <List.Item>
+                        <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={true} clickMovie={clickMovie}></MovieListItem>
+                    </List.Item>
+                )) : movieList.map((movie) => (
                     <List.Item>
                         <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={true} clickMovie={clickMovie}></MovieListItem>
                     </List.Item>
