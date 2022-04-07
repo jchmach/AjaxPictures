@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { gql, useLazyQuery, useQuery } from '@apollo/client';
 import { List, Input, Button} from 'semantic-ui-react'
 import MovieListItem from './MovieListItem';
+import '../styles/AdminSearch.css'
 function AdminSearch(props){
     const {searchExisting, clickMovie, goBack} = props;
     const [inputVal, setInputVal] = useState("")
@@ -52,11 +53,10 @@ function AdminSearch(props){
 
     return(
         <div>
-            <Button onClick={goBack}>Back</Button>
+            <Button id="Go_Back" onClick={goBack}>Back</Button>
             <div id="Search">
-                <div id="Search_icon"></div>
-                <Input  onChange={changeInput}></Input>
-                <Button disabled={!inputVal.length && !searchExisting} onClick={() => {search()}}>Search</Button>
+                <Input id="Admin_Search" onChange={changeInput}></Input>
+                <Button id="Admin_Search_Button"disabled={!inputVal.length && !searchExisting} onClick={() => {search()}}>Search</Button>
             </div>
             <List>
                 { searchExisting? filteredList.map((movie) => (

@@ -4,7 +4,7 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import { useNavigate, useLocation } from "react-router-dom";
 import {Button, Input} from 'semantic-ui-react'
 import AdminSearch from "../components/AdminSearch";
-
+import '../styles/AdminActions.css'
 function AdminActions(){
     const navigation = useNavigate()
     const [movieInfo, setInfo] = useState({
@@ -67,9 +67,9 @@ function AdminActions(){
     return(
         <div>
             {showSearch? <AdminSearch searchExisting={existing} clickMovie={clickMovie} goBack={goBack}></AdminSearch> :
-                        <div>            
-                            <Button onClick={addNew}>Add new</Button>
-                            <Button onClick={manage}>Manage</Button> 
+                        <div id="Admin_Button_Container">            
+                            <Button className="Admin_Button" id="Admin_Add"onClick={addNew}>Add new</Button>
+                            <Button className="Admin_Button" id="Admin_Manage" onClick={manage}>Manage</Button> 
                         </div> 
             }
         </div>

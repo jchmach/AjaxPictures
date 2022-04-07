@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import { useNavigate } from "react-router";
 import {useQuery, useMutation} from '@apollo/client'
 import AdminTimeslots from "./AdminTimeslots";
-
+import '../styles/AdminMovieComp.css'
 function AdminMovieComp(props){
     const navigation = useNavigate()
     const{title, year} = props;
@@ -58,52 +58,55 @@ function AdminMovieComp(props){
 
     return (
         <div>
-        <img src={movie.Poster}></img>
-        <div>
-            <div>
-                <label>{movie.Title}</label>
-                <label>{movie.Year}</label>
+            <div id="Movie_Info_Container">
+                <img src={movie.Poster}></img>
+                <div>
+                    <div>
+                        <label className="Movie_Header">{movie.Title}</label>
+                        <label className="Movie_Header"> ({year})</label>
+                    </div>
+                    <div>
+                        <label>Director</label>
+                        <label>{movie.Director}</label>
+                    </div>
+                    <div>
+                        <label>Plot</label>
+                        <label>{movie.Plot}</label>
+                    </div>
+                    <div>
+                        <label>Genre</label>
+                        <label>{movie.Genre}</label>
+                    </div>
+                    <div>
+                        <label>Released</label>
+                        <label>{movie.Released}</label>
+                    </div>
+                    <div>
+                        <label>Language</label>
+                        <label>{movie.Language}</label>
+                    </div>
+                    <div>
+                        <label>Runtime</label>
+                        <label>{movie.Runtime}</label>
+                    </div>
+                    <div>
+                        <label>IMDB Score</label>
+                        <label>{movie.imdb}</label>
+                    </div>
+                    <div>
+                        <label>Metacritic Score</label>
+                        <label>{movie.MetaScore}</label>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label>Director</label>
-                <label>{movie.Director}</label>
-            </div>
-            <div>
-                <label>Plot</label>
-                <label>{movie.Plot}</label>
-            </div>
-            <div>
-                <label>Genre</label>
-                <label>{movie.Genre}</label>
-            </div>
-            <div>
-                <label>Released</label>
-                <label>{movie.Released}</label>
-            </div>
-            <div>
-                <label>Language</label>
-                <label>{movie.Language}</label>
-            </div>
-            <div>
-                <label>Runtime</label>
-                <label>{movie.Runtime}</label>
-            </div>
-            <div>
-                <label>IMDB Score</label>
-                <label>{movie.imdb}</label>
-            </div>
-            <div>
-                <label>Metacritic Score</label>
-                <label>{movie.MetaScore}</label>
-            </div>
+            
             <Button onClick={goBack}>Back</Button>
-            <Button onClick={deleteMovie}>Delete</Button>
-            <Popup trigger={<Button>Add</Button>} flowing hoverable>
-                <Calendar minDate={today} maxDate={twoWeeks} onClickDay={calendarClick}> </Calendar>
-            </Popup>
-            {dateSelected? <AdminTimeslots movieId={movie.ID}  movieTitle={movie.Title} date={date}></AdminTimeslots> : null}
+                <Button onClick={deleteMovie}>Delete</Button>
+                <Popup trigger={<Button>Add</Button>} flowing hoverable>
+                    <Calendar minDate={today} maxDate={twoWeeks} onClickDay={calendarClick}> </Calendar>
+                </Popup>
+                {dateSelected? <AdminTimeslots movieId={movie.ID}  movieTitle={movie.Title} date={date}></AdminTimeslots> : null}
         </div>
-    </div>
     )
 
 }

@@ -29,7 +29,7 @@ function MovieListItem(props){
             <div className="Movie_Info_Container">
                 <label className="Movie_Info">{title}</label>
                 <label className="Movie_Info Movie_Info_Year">({year})</label>
-                {existing? <Button onClick={deleteMovie}>Delete</Button> : null}
+                {existing? <Button id="Delete_Movie"onClick={deleteMovie}>Delete</Button> : null}
             </div>
         </div>
     )

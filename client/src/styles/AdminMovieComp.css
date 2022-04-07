@@ -1,0 +1,8 @@
+#Movie_Info_Container{
+    display: flex;
+    flex-direction: row;
+}
+
+.Movie_Header{
+    font-size: xx-large;
+}
