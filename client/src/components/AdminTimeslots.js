@@ -76,6 +76,16 @@ function AdminTimeslots (props){
         }
     })
 
+    const [deleteDateDB] = useMutation(DELETE_DATE, {
+        variables: {movieId: movieId, date: date},
+        onCompleted(){
+            getUsedTimeslots();
+        },
+        onError(err){
+            console.log(err);
+        }
+    })
+
     useEffect(() => {
         getTimeslots();
     }, [slots])
@@ -104,10 +114,12 @@ function AdminTimeslots (props){
         setTimeslotDelete(timeslot);
     }
 
+
     return(
         <div>
             <label>{date}</label>
             <label>Click on a timeslot to delete it</label>
+            <Button onClick={deleteDateDB}>Delete All Timeslots</Button>
             <div id="Timeslot_Container">
                 <Grid stackable columns={5}>
                     {slots.map((timeslot) => (
@@ -206,6 +218,18 @@ const DELETE_TIMESLOT = gql`
        ){
            availableSeats
        }
+    }
+`
+
+const DELETE_DATE = gql`
+    mutation removeDate(
+        $movieId: String
+        $date: String
+    ) {
+        removeDate(
+            date: $date
+            movieId: $movieId
+        )
     }
 `
 export default AdminTimeslots;
