@@ -84,6 +84,7 @@ function Register(){
         update(proxy, {data: {register: userData}}){
             context.login(userData);
             navigate('/');
+            window.location.reload();
         },
         onError(err){
             console.log(err.graphQLErrors[0].extensions.errors);
@@ -138,36 +139,16 @@ function Register(){
                     onChange={onChange}
                 />
                 <Divider horizontal>
-                    Select Three Favourite Genres (Optional)
+                    Select Favourite Genre (Optional)
                 </Divider>
                 <Form.Dropdown
-                    placeholder='Select Genre 1'
+                    placeholder='Choose Genre'
                     fluid
                     selection
                     options={genreOptions}
                     name="preferredGenre1"
                     onChange={onChange2}
                     value={values.preferredGenre1}
-                    
-                />
-                <Form.Dropdown
-                    placeholder='Select Genre 2'
-                    fluid
-                    selection
-                    options={genreOptions}
-                    name="preferredGenre2"
-                    onChange={onChange2}
-                    value={values.preferredGenre2}
-                    
-                />
-                <Form.Dropdown
-                    placeholder='Select Genre 3'
-                    fluid
-                    selection
-                    options={genreOptions}
-                    name="preferredGenre3"
-                    onChange={onChange2}
-                    value={values.preferredGenre3}
                     
                 />
                 <Divider horizontal>

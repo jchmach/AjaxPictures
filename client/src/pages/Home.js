@@ -4,16 +4,16 @@ import {AuthContext} from '../context/auth'
 
 function Home(){
     const context = useContext(AuthContext);
+    let genre = ""
     if (context.user){
-        const genre1 = context.user.preferredGenre1
-        console.log(genre1)
+        genre = context.user.preferredGenre1
+        console.log(genre)
     }
-    
-    return(
+    const homePage = context.user ? (
         <div>
-            <h1 class="ui header">Suggested</h1>
+            <h1 class="ui header">Suggested Movies</h1>
             <h1>
-                <MovieCoulmn genre={context.user.preferredGenre1}></MovieCoulmn>
+                <MovieCoulmn genre={genre}></MovieCoulmn>
             </h1>
             <h1 class="ui header">Comedy</h1>
             <h1>
@@ -24,7 +24,20 @@ function Home(){
                 <MovieCoulmn genre={"Drama, Romance"}></MovieCoulmn>
             </h1>
         </div>
-    )
+    ) :
+      (
+        <div>
+            <h1 class="ui header">Comedy</h1>
+            <h1>
+                <MovieCoulmn genre={"Comedy"}></MovieCoulmn>
+            </h1>
+            <h1 class="ui header">Romance</h1>
+            <h1>
+                <MovieCoulmn genre={"Drama, Romance"}></MovieCoulmn>
+            </h1>
+        </div>
+    );
+    return homePage
 }
 
 export default Home;
