@@ -11,10 +11,10 @@ export default function MovieCoulmn(props) {
     let for_adding_in_admin = "mutation Mutation($title: String) {createMovie(Title: $title) {Title}}"
 
     let movie_list = null
-    let variable_arg =  {variables: {}}
+    let variable_arg =  {fetchPolicy: 'network-only', variables: {}}
     let Query_arg =  GET_MOVIES
     if(props && props.genre){
-        variable_arg =  {variables: {"genre": props.genre}}
+        variable_arg =  {fetchPolicy: 'network-only', variables: {"genre": props.genre}}
         Query_arg = GET_MOVIES_GENRE
     }
     const { loading, error, data } = useQuery(Query_arg, variable_arg);
