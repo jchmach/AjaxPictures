@@ -32,8 +32,8 @@ services:
     expose:
       - 3000
     environment:
-      - VIRTUAL_HOST=ajaxpictures.me
-      - LETSENCRYPT_HOST=ajaxpictures.me
+      - VIRTUAL_HOST=ajaxpictures.me,www.ajaxpictures.me
+      - LETSENCRYPT_HOST=ajaxpictures.me,www.ajaxpictures.me
       
   server:
     image: ghcr.io/utscc09/server-jchmach:dev
@@ -42,5 +42,5 @@ services:
     expose:
       - 5000
     environment:
-      - VIRTUAL_HOST=api.ajaxpictures.me
-      - LETSENCRYPT_HOST=api.ajaxpictures.me
+      - VIRTUAL_HOST=api.ajaxpictures.me,www.api.ajaxpictures.me
+      - LETSENCRYPT_HOST=api.ajaxpictures.me,www.api.ajaxpictures.me
