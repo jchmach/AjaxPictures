@@ -116,7 +116,8 @@ export default {
             await Ticket.deleteMany({movieId: movieId, date: date, timeSlot: {"$in": dates}})
             // Delete all timeslots
             await Timeslot.deleteMany({movieId: movieId});
-            return Movie.deleteOne({_id: movieId});
+            const movie = await Movie.deleteOne({_id: movieId});
+            return movie.deletedCount;
         }
 
     },

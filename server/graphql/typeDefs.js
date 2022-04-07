@@ -62,7 +62,7 @@ const gqlStr = gql`
         purchaseTickets(userId: ID!, seats: [Seats]!): [Ticket]
         refundTicket(ticketId: ID!): Ticket
         removeDate(movieId: String, date: String): Int
-        removeMovie(movieId: String): Movie
+        removeMovie(movieId: String): Int
     }
 
 

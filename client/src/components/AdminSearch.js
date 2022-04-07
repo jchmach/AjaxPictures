@@ -15,6 +15,9 @@ function AdminSearch(props){
             variables: {search: query},
             onCompleted(data){
                 setFiltered(data.getLocalMovieList);
+                if (searchExisting){
+                    setList(data.getLocalMovieList)
+                }
             }
         })
     const [searchNew] = useLazyQuery(OMDB_MOVIES, {
@@ -41,6 +44,12 @@ function AdminSearch(props){
         setQuery(inputVal)
     }
 
+    const refreshList = (id) => {
+        var updatedList = movieList.filter(movie => movie.id != id);
+        setList(updatedList);
+        setFiltered(updatedList);
+    }
+
     return(
         <div>
             <Button onClick={goBack}>Back</Button>
@@ -52,7 +61,7 @@ function AdminSearch(props){
             <List>
                 { searchExisting? filteredList.map((movie) => (
                     <List.Item>
-                        <MovieListItem poster={movie.Poster} title={movie.Title} year={movie.Year} existing={searchExisting} clickMovie={clickMovie}></MovieListItem>
+                        <MovieListItem poster={movie.Poster} title={movie.Title} movieId={movie.id}  refreshList={refreshList} year={movie.Year} existing={searchExisting} clickMovie={clickMovie}></MovieListItem>
                     </List.Item>
                 )) : movieList.map((movie) => (
                     <List.Item>
