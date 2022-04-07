@@ -5,13 +5,14 @@ import { Button, Dropdown, Grid, Modal, Segment } from 'semantic-ui-react';
 import '../styles/AdminTimeslot.css'
 
 function AdminTimeslots (props){
-    const {movieId, movieTitle, date, deleteTimeslot} = props;
+    const {movieId, movieTitle, date} = props;
     const [open , setOpen] = useState(false);
     const [slots, setTimeslots] = useState([]);
     const [unusedSlots, setUnusedSlots] = useState([]);
     const [selectedSlot, setSelectedSlot] = useState("");
     const [unusedTheaters, setUnusedTheaters] = useState([]);
     const [selectedTheater, setSelectedTheater] = useState(null);
+    const [toTimeslotDelete, setTimeslotDelete] = useState("");
 
     useQuery(MOVIE_TIMESLOTS, {
         fetchPolicy: 'network-only',
@@ -31,6 +32,11 @@ function AdminTimeslots (props){
         variables: {movieId: movieId, date: date},
         onCompleted(data){
             setTimeslots(data.timeslotTimes.map(obj => obj.timeSlot));
+        },
+        onError(err){
+            if(err.message.includes("GraphQL error: No timeslots found for movie:")){
+                setTimeslots([]);
+            }
         }
     });
     const [getTimeslots] = useLazyQuery(UNUSED_TIMESLOTS, {
@@ -60,12 +66,28 @@ function AdminTimeslots (props){
         }
     })
 
+    const [deleteTimeslotDB] = useMutation(DELETE_TIMESLOT, {
+        variables: {movieId: movieId, date: date, timeslot: toTimeslotDelete},
+        onCompleted(){
+            getUsedTimeslots();
+        },
+        onError(err){
+            console.log(err);
+        }
+    })
+
     useEffect(() => {
         getTimeslots();
     }, [slots])
+
     useEffect(() => {
         getTheaters();
     }, [selectedSlot])
+
+    useEffect(() => {
+        deleteTimeslotDB();
+    }, [toTimeslotDelete])
+
     const changeSlot = (err, dropdown) =>{
         setSelectedSlot(dropdown.value);
     }
@@ -77,6 +99,11 @@ function AdminTimeslots (props){
         createTimeslotDB();
         setOpen(false);
     }
+
+    const deleteTimeslot = (timeslot) => {
+        setTimeslotDelete(timeslot);
+    }
+
     return(
         <div>
             <label>{date}</label>
@@ -85,7 +112,7 @@ function AdminTimeslots (props){
                 <Grid stackable columns={5}>
                     {slots.map((timeslot) => (
                         <Grid.Column key={timeslot} width={2}>
-                            <Segment id="Admin_Timeslot_grid"onClick={() => deleteTimeslot(movieId, date, timeslot)}>{timeslot}</Segment>
+                            <Segment id="Admin_Timeslot_grid"onClick={() => deleteTimeslot(timeslot)}>{timeslot}</Segment>
                         </Grid.Column>
                     ))}
                 </Grid>
@@ -166,5 +193,19 @@ const CREATE_TIMESLOT = gql`
        }
     }
 `
-
+const DELETE_TIMESLOT = gql`
+    mutation removeTimeslot(
+        $timeslot: String
+        $date: String
+        $movieId: String
+    ) {
+        removeTimeslot(
+           timeSlot: $timeslot
+           date: $date
+           movieId: $movieId
+       ){
+           availableSeats
+       }
+    }
+`
 export default AdminTimeslots;
