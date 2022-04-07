@@ -139,7 +139,7 @@ function AdminTimeslots (props){
                 <Modal.Header>Add a timeslot</Modal.Header>
                 <Modal.Content>
                     <Dropdown placeholder ='Select date' options={unusedSlots} onChange={changeSlot} selection fluid></Dropdown>
-                    <Dropdown disabled={!selectedSlot.length} options={unusedTheaters} onChange={changeTheater} selection fluid></Dropdown>
+                    <Dropdown placeholder='Select theater' disabled={!selectedSlot.length} options={unusedTheaters} onChange={changeTheater} selection fluid></Dropdown>
                 </Modal.Content>
                 <Modal.Actions>
                     <Button onClick={() => setOpen(false)}>Cancel</Button>

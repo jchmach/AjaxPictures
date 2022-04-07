@@ -9,7 +9,10 @@ function genToken(user){
     return jwt.sign({
         id: user.id,
         email: user.email,
-        username: user.username
+        username: user.username,
+        preferredGenre1: user.preferredGenre1,
+        preferredGenre2: user.preferredGenre2,
+        preferredGenre3: user.preferredGenre3
     }, SECRET, {expiresIn: '2h'});
 }
 
@@ -40,7 +43,7 @@ export default {
         async register(
             _,
             {
-                registerInput: {username, email, password, confirmPassword}
+                registerInput: {username, email, password, confirmPassword, preferredGenre1, preferredGenre2, preferredGenre3}
             }, 
             context, 
             info)
@@ -66,7 +69,10 @@ export default {
                 email,
                 username,
                 password,
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                preferredGenre1,
+                preferredGenre2,
+                preferredGenre3
             })
             const res = await newUser.save();
             const token = genToken(res);
