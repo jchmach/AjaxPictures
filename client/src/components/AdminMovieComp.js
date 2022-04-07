@@ -81,7 +81,7 @@ function AdminMovieComp(props){
             <Popup trigger={<Button>Add</Button>} flowing hoverable>
                 <Calendar minDate={today} maxDate={twoWeeks} onClickDay={calendarClick}> </Calendar>
             </Popup>
-            {dateSelected? <AdminTimeslots movieId={movie.ID} date={date}></AdminTimeslots> : null}
+            {dateSelected? <AdminTimeslots movieId={movie.ID}  movieTitle={movie.Title} date={date}></AdminTimeslots> : null}
         </div>
     </div>
     )

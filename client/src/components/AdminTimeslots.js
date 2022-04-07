@@ -1,14 +1,17 @@
 import React, {useState, useEffect } from 'react';
 import gql from "graphql-tag";
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
 import { Button, Dropdown, Grid, Modal, Segment } from 'semantic-ui-react';
 import '../styles/Timeslot.css'
 
 function AdminTimeslots (props){
-    const {movieId, date, deleteTimeslot} = props;
+    const {movieId, movieTitle, date, deleteTimeslot} = props;
     const [open , setOpen] = useState(false);
     const [slots, setTimeslots] = useState([]);
     const [unusedSlots, setUnusedSlots] = useState([]);
+    const [selectedSlot, setSelectedSlot] = useState("");
+    const [unusedTheaters, setUnusedTheaters] = useState([]);
+    const [selectedTheater, setSelectedTheater] = useState(null);
     useQuery(MOVIE_TIMESLOTS, {
         fetchPolicy: 'network-only',
         variables: {movieId: movieId, date: date},
@@ -32,11 +35,38 @@ function AdminTimeslots (props){
         }
     })
 
+    const [getTheaters] = useLazyQuery(UNUSED_THEATERS, {
+        fetchPolicy: 'network-only',
+        variables: {date: date, timeslot: selectedSlot },
+        onCompleted(data){
+            var temp = data.unusedTheaters;
+            temp = temp.map(theater => ({text: theater, key: theater, value: theater}));
+            setUnusedTheaters(temp);
+        }
+    })
+
+    const [createTimeslotDB] = useMutation(CREATE_TIMESLOT, {
+        variables: {movieId: movieId, movieTitle: movieTitle, date: date, timeslot: selectedSlot, theater: selectedTheater}
+    })
+
     useEffect(() => {
         getTimeslots();
     }, [slots])
+    useEffect(() => {
+        getTheaters();
+    }, [selectedSlot])
+    const changeSlot = (err, dropdown) =>{
+        setSelectedSlot(dropdown.value);
+    }
+    const changeTheater = (err, dropdown) =>{
+        setSelectedTheater(dropdown.value)
+    }
 
-
+    const createTimeslot = (data) => {
+        console.log(data);
+        createTimeslotDB();
+        setOpen(false);
+    }
     return(
         <div>
             <label>{date}</label>
@@ -57,11 +87,12 @@ function AdminTimeslots (props){
 
                 <Modal.Header>Add a timeslot</Modal.Header>
                 <Modal.Content>
-                    <Dropdown placeholder ='Select date' options={unusedSlots} selection fluid></Dropdown>
+                    <Dropdown placeholder ='Select date' options={unusedSlots} onChange={changeSlot} selection fluid></Dropdown>
+                    <Dropdown disabled={!selectedSlot.length} options={unusedTheaters} onChange={changeTheater} selection fluid></Dropdown>
                 </Modal.Content>
                 <Modal.Actions>
                     <Button onClick={() => setOpen(false)}>Cancel</Button>
-                    <Button>Create</Button>
+                    <Button disabled={!selectedTheater} onClick={createTimeslot}>Create</Button>
                 </Modal.Actions>
             </Modal>
         </div>
@@ -95,31 +126,35 @@ const UNUSED_TIMESLOTS = gql`
     }
 `
 
+const UNUSED_THEATERS = gql`
+    query unusedTheaters(
+        $timeslot: String
+        $date: String
+    ) {
+        unusedTheaters(
+           timeslot: $timeslot
+           date: $date
+       )
+    }
+`
+const CREATE_TIMESLOT = gql`
+    mutation createTimeslot(
+        $timeslot: String
+        $date: String
+        $movieId: String
+        $movieTitle: String
+        $theater: Int
+    ) {
+        createTimeslot(
+           timeSlot: $timeslot
+           date: $date
+           movieId: $movieId
+           theater: $theater
+           movieTitle: $movieTitle
+       ){
+           availableSeats
+       }
+    }
+`
 
-// const UNUSED_TIMESLOTS = gql`
-//     query unusedTimeslots(
-//         $movieId: String
-//         $date: String
-//     ) {
-//         unusedTimeslots(
-//            movieId: $movieId
-//            date: $date
-//        ){
-//        }
-//     }
-// `
-
-// const UNUSED_THEATERS = gql`
-//     query timeslotTimes(
-//         $movieId: String
-//         $date: String
-//     ) {
-//        timeslotTimes(
-//            movieId: $movieId
-//            date: $date
-//        ){
-//            timeSlot
-//        }
-//     }
-// `
 export default AdminTimeslots;
