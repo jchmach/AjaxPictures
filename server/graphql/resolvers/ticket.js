@@ -37,7 +37,7 @@ export default {
             return toReturn;
         },
         async refundTicket (root, {ticketId}, context, info){
-            return Ticket.deleteOne({id: ticketId});
+            return Ticket.deleteOne({_id: ticketId});
         }
     }
 }

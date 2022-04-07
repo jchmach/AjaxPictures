@@ -93,7 +93,7 @@ export default {
                 seating[row.charCodeAt(0) - 65][parseInt(seats[i].seatNumber) - 1].isReserved = false;
             }
             // Update the seat count
-            const availableSeats = slot.availableSeats - seats.length;
+            const availableSeats = slot.availableSeats + seats.length;
             // Update the timeslot with the new seating plan
             return Timeslot.updateOne({movieId: movieId, date: date, timeSlot: timeSlot}, {seating: seating, availableSeats: availableSeats});
         },

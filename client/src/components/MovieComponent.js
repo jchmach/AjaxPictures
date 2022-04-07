@@ -11,7 +11,6 @@ export default function MovieComponent(props) {
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
 
-    console.log(data.GetMovie)
     const movieItem = data.GetMovie
 
   return (
@@ -73,7 +72,7 @@ export default function MovieComponent(props) {
         <p></p>
         <p></p>
         <p></p>
-        {onPurchasePage? null : <button className="blue massive ui button" onClick={() => navigateNext(movieItem.id)}>
+        {onPurchasePage? null : <button className="blue massive ui button" onClick={() => navigateNext(movieItem.id, movieItem.Title)}>
                                     Buy Ticket
                                 </button>}
 

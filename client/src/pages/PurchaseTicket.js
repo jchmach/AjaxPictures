@@ -57,14 +57,13 @@ function PurchaseTicket(){
     return(
         <div id="Purchase_Page">
         <div id="Purchase_MovieInfo">
-            <MovieComponent onPurchasePage={true}  movieName="The Batman"></MovieComponent>           
+            <MovieComponent onPurchasePage={true}  movieName={params.state.movieData.movieTitle}></MovieComponent>           
 
         </div>
         <div id="Header">
             <Button id="Purchase_Return" onClick={goBack}>Back</Button>
             <Label className="Purchase_TimeslotInfo">{params.state.movieData.date}</Label>
             <Label className="Purchase_TimeslotInfo">{params.state.movieData.timeslot}</Label>
-            <Button onClick={() => console.log(context.user)}></Button>
 
         </div>
         <div id="Purchase_Container">

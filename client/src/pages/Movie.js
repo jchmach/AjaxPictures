@@ -11,13 +11,13 @@ export default function Movie() {
     const location = useLocation();
     let path = location.pathname.split("/")[2];
     path = path.replaceAll("%20", " ");
-    console.log(path)
     const navigate = useNavigate();
 
-    const purchase = (movieId) =>{
+    const purchase = (movieId, title) =>{
         context.user? navigate("/movietimeslots", {
             state:{
-                movieId
+                movieId,
+                title
             }
         }) : navigate("/login")
     }

@@ -7,7 +7,6 @@ import MovieCard from './MovieCard';
 
 export default function MovieCoulmn(props) {
 
-    console.log(props.genre)
 
     let for_adding_in_admin = "mutation Mutation($title: String) {createMovie(Title: $title) {Title}}"
 
@@ -22,13 +21,9 @@ export default function MovieCoulmn(props) {
     if (loading) return 'Loading...';
     if (error) return `Error! ${error}`;
     if(props && props.genre){
-        console.log(data)
         movie_list = data.GetMoviesGenre
-        console.log(movie_list[0].Poster)
     }else{
-        console.log(data)
         movie_list = data.GetMovies
-        console.log(movie_list[0].Poster)
     }
     const movieItems = movie_list.map((movie) =>  
         <MovieCard Title={movie.Title} Poster={movie.Poster}></MovieCard>
