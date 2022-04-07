@@ -12,6 +12,7 @@ function AdminTimeslots (props){
     const [selectedSlot, setSelectedSlot] = useState("");
     const [unusedTheaters, setUnusedTheaters] = useState([]);
     const [selectedTheater, setSelectedTheater] = useState(null);
+
     useQuery(MOVIE_TIMESLOTS, {
         fetchPolicy: 'network-only',
         variables: {movieId: movieId, date: date},
@@ -25,6 +26,13 @@ function AdminTimeslots (props){
         }
     });
 
+    const [getUsedTimeslots] = useLazyQuery(MOVIE_TIMESLOTS, {
+        fetchPolicy: 'network-only',
+        variables: {movieId: movieId, date: date},
+        onCompleted(data){
+            setTimeslots(data.timeslotTimes.map(obj => obj.timeSlot));
+        }
+    });
     const [getTimeslots] = useLazyQuery(UNUSED_TIMESLOTS, {
         fetchPolicy: 'network-only',
         variables: {movieId: movieId, date: date},
@@ -46,7 +54,10 @@ function AdminTimeslots (props){
     })
 
     const [createTimeslotDB] = useMutation(CREATE_TIMESLOT, {
-        variables: {movieId: movieId, movieTitle: movieTitle, date: date, timeslot: selectedSlot, theater: selectedTheater}
+        variables: {movieId: movieId, movieTitle: movieTitle, date: date, timeslot: selectedSlot, theater: selectedTheater},
+        onCompleted(){
+            getUsedTimeslots();
+        }
     })
 
     useEffect(() => {
@@ -63,7 +74,6 @@ function AdminTimeslots (props){
     }
 
     const createTimeslot = (data) => {
-        console.log(data);
         createTimeslotDB();
         setOpen(false);
     }
