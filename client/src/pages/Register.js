@@ -30,9 +30,9 @@ function Register(){
           value: 'Comedy',
         },
         {
-          key: 'Animated',
-          text: 'Animated',
-          value: 'Animated',
+          key: 'Animation',
+          text: 'Animation',
+          value: 'Animation',
         },
         {   
             key: 'Crime',
@@ -46,9 +46,9 @@ function Register(){
         
         },
         {
-            key: 'Family',
-            text: 'Family',
-            value: 'Family',
+            key: 'Mystery',
+            text: 'Mystery',
+            value: 'Mystery',
         },
         {
             key: 'Horror',

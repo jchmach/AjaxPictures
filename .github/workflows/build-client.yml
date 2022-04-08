@@ -58,8 +58,4 @@ jobs:
           script: |
             docker stop ajaxclient
             docker rm ajaxclient
-            docker stop ajaxserver
-            docker rm ajaxserver
-            docker-compose pull
-            docker-compose build
-            docker-compose up -d nginx-proxy nginx-proxy-acme client
+            docker-compose pull && docker-compose up -d nginx-proxy nginx-proxy-acme client
