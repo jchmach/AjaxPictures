@@ -61,7 +61,6 @@ export default {
                 imdb: movie.imdbRating,
                 MetaScore: movie.Metascore,
             }
-
             return Movie.create(result_movie);
         },
         async createMovieYear(root, {Title, Year}, context, info){

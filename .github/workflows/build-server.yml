@@ -4,7 +4,7 @@ on:
   push:
     # Only run this workflow if it is a commit to master.
     branches:
-      - dev
+      - justinAdminBranch
     # Only run this workflow if the commit has modified files from frontend
     paths:
       - server/**
@@ -57,8 +57,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            docker stop ajaxclient
-            docker rm ajaxclient
             docker stop ajaxserver
             docker rm ajaxserver
             docker-compose pull && docker-compose up -d nginx-proxy nginx-proxy-acme server
