@@ -13,6 +13,10 @@ import MovieTimeslots from './pages/MovieTimeslots';
 import PurchaseTicket from './pages/PurchaseTicket';
 import MenuBar from './components/MenuBar';
 import Movie from './pages/Movie';
+import AdminActions from './pages/AdminActions';
+import AdminMovie from './pages/AdminMovie';
+import ManageBookings from './pages/ManageBookings';
+import Movies from './pages/Movies';
 
 function App() {
   return (
@@ -27,6 +31,11 @@ function App() {
             <Route path="/movietimeslots" element={<MovieTimeslots/>}/>
             <Route path="/purchaseticket" element={<PurchaseTicket/>}/>
             <Route path="/movie" element={<Movie/>}/>
+            <Route path="/adminactions" element={<AdminActions/>}/>
+            <Route path="/adminmovie" element={<AdminMovie/>}/>
+            <Route path="/managebookings" element={<ManageBookings/>}/>
+            <Route path="/movie/:id" element={<Movie/>}/>
+            <Route path="/Movies" element={<Movies/>}/>
           </Routes>
         </Container>
       </Router>

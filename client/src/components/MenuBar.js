@@ -20,17 +20,33 @@ function MenuBar() {
           to="/"
         />
         <Menu.Item
-          name='Movie'
-          active={activeItem === 'Movie'}
+          name='Movies'
+          active={activeItem === 'Movies'}
           onClick={handleItemClick}
           as={Link}
-          to="/Movie"
+          to="/Movies"
         />
+        {user.username === "admin"? <Menu.Item 
+          name='Manage'
+          onClick={handleItemClick}
+          as={Link}
+          to="/AdminActions"
+        />: null}
         <Menu.Menu position='right'>
+          <Menu.Item
+            name='bookings'
+            active={activeItem === 'bookings'}
+            onClick={handleItemClick}
+            as={Link}
+            to="/managebookings"
+          />
+
           <Menu.Item
             name='logout'
             active={activeItem === 'login'}
             onClick={logout}
+            as={Link}
+            to="/"
           />
         </Menu.Menu>  
       </Menu>
@@ -45,11 +61,11 @@ function MenuBar() {
           to="/"
         />
         <Menu.Item
-          name='Movie'
-          active={activeItem === 'Movie'}
+          name='Movies'
+          active={activeItem === 'Movies'}
           onClick={handleItemClick}
           as={Link}
-          to="/Movie"
+          to="/Movies"
         />
         <Menu.Menu position='right'>
           <Menu.Item

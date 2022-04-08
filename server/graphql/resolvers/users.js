@@ -1,20 +1,22 @@
-const User = require('../../models/User');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const {UserInputError} = require('apollo-server');
+import User from '../../models/user.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import {UserInputError} from 'apollo-server';
+import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
 
-const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
-const {SECRET} = require('../../config');
-
+import {SECRET} from '../../config.js'
 function genToken(user){
     return jwt.sign({
         id: user.id,
         email: user.email,
-        username: user.username
+        username: user.username,
+        preferredGenre1: user.preferredGenre1,
+        preferredGenre2: user.preferredGenre2,
+        preferredGenre3: user.preferredGenre3
     }, SECRET, {expiresIn: '2h'});
 }
 
-module.exports = {
+export default {
     Mutation : {
         async login(_, {username, password}){
             const { valid, errors} = validateLoginInput(username, password);
@@ -41,7 +43,7 @@ module.exports = {
         async register(
             _,
             {
-                registerInput: {username, email, password, confirmPassword}
+                registerInput: {username, email, password, confirmPassword, preferredGenre1, preferredGenre2, preferredGenre3}
             }, 
             context, 
             info)
@@ -67,7 +69,10 @@ module.exports = {
                 email,
                 username,
                 password,
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                preferredGenre1,
+                preferredGenre2,
+                preferredGenre3
             })
             const res = await newUser.save();
             const token = genToken(res);

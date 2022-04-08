@@ -1,0 +1,47 @@
+#Poster{
+    width: 150px;
+    height: 200px;
+}
+
+.Movie_Item{
+    display: flex;
+    flex-direction: row;
+    border-style:solid;
+    border-color:darkgray;
+    width: 2000x;
+}
+
+.Movie_Info{
+    font-size:xx-large;
+}
+
+.Movie_Info_Container{
+    display: flex;
+    padding-top: 90px;
+    padding-left: 30px;
+    width: 100%;
+}
+
+.Movie_Info_Year{
+    padding-left: 10px;
+}
+
+#Delete_Movie{
+    margin-left: auto;
+    margin-right: 10px;
+    height: fit-content;
+    background-color: white;
+    border-style: solid;
+    border-color: red;
+    color: red;
+}
+
+#Delete_Movie:hover{
+    margin-left: auto;
+    margin-right: 10px;
+    height: fit-content;
+    background-color: red;
+    border-style: solid;
+    border-color: white;
+    color: white;
+}

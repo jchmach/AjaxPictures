@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from "react";
 import gql from "graphql-tag";
-import {useMutation, useQuery} from '@apollo/react-hooks'
+import {useMutation} from '@apollo/react-hooks'
 import { useNavigate, useLocation } from "react-router-dom";
 import SeatMap from "../components/SeatMap";
 import { Button, Label } from "semantic-ui-react";
@@ -43,7 +43,7 @@ function PurchaseTicket(){
     }
 
     useEffect(()=>{
-        if(selected.length != 0){
+        if(selected.length !== 0){
             reserveSeats();
         }
     }, [selected])
@@ -57,7 +57,7 @@ function PurchaseTicket(){
     return(
         <div id="Purchase_Page">
         <div id="Purchase_MovieInfo">
-            <MovieComponent onPurchasePage={true}  movieName="The Batman"></MovieComponent>           
+            <MovieComponent onPurchasePage={true}  movieName={params.state.movieData.movieTitle}></MovieComponent>           
 
         </div>
         <div id="Header">

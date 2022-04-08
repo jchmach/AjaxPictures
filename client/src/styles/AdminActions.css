@@ -1,0 +1,42 @@
+.Admin_Button{
+    width: 200px;
+    height: 75px;
+
+}
+
+#Admin_Add{
+    border-radius: 2px;
+    border-style: solid;
+    border-color: cornflowerblue;
+    background-color: white;
+    color: cornflowerblue;
+    margin-right: 100px;
+}
+#Admin_Manage{
+    border-radius: 2px;
+    border-style: solid;
+    border-color: cornflowerblue;
+    background-color: white;
+    color: cornflowerblue;
+}
+
+#Admin_Add:hover{
+    border-radius: 2px;
+    border-style: solid;
+    border-color: cornflowerblue;
+    background-color: cornflowerblue;
+    color: white;
+    margin-right: 100px;
+}
+#Admin_Manage:hover{
+    border-radius: 2px;
+    border-style: solid;
+    border-color: cornflowerblue;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+#Admin_Button_Container{
+    display: flex;
+    justify-content: center;
+}

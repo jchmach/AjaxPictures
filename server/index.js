@@ -1,16 +1,14 @@
-const {ApolloServer} = require('apollo-server');
-const gql = require('graphql-tag');
-const mongoose = require('mongoose');
-
-const typeDefs = require('./graphql/typeDefs');
-const resolvers = require('./graphql/resolvers')
-const {CONNECTION_URL} = require('./config.js');
-
-
+import {ApolloServer} from 'apollo-server';
+import mongoose from 'mongoose'
+import typeDefs from './graphql/typeDefs.js';
+import resolvers from './graphql/resolvers/index.js';
+import { CONNECTION_URL } from './config.js';
+import {ApolloServerPluginLandingPageDisabled} from "apollo-server-core";
 const server = new ApolloServer ({
     typeDefs,
     resolvers,
-    context:({req}) => ({req})
+    context:({req}) => ({req}),
+    plugins: [ApolloServerPluginLandingPageDisabled()]
 });
 
 mongoose.

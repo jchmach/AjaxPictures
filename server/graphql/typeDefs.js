@@ -1,6 +1,5 @@
-const { gql } = require('apollo-server');
-
-module.exports = gql`
+import gql from 'graphql-tag';
+const gqlStr = gql`
 
     type User{
         id:ID!
@@ -8,6 +7,9 @@ module.exports = gql`
         token: String!
         username: String!
         createdAt: String!
+        preferredGenre1: String
+        preferredGenre2: String
+        preferredGenre3: String
     }
     type Movie{
         id:ID!
@@ -23,17 +25,16 @@ module.exports = gql`
         Poster:String
         imdb:String
         MetaScore:String
+        trailerUrl:String
     }
     input RegisterInput{
         username: String!
         password: String!
         confirmPassword: String!
         email: String!
-    }
-    # A book has a title and author
-    type Book {
-        title: String
-        author: String
+        preferredGenre1: String
+        preferredGenre2: String
+        preferredGenre3: String
     }
     type Query{
         timeslot(movieId: String, date: String, timeSlot: String ): Timeslot
@@ -44,7 +45,13 @@ module.exports = gql`
         ticketsByDate(date: String): [Ticket]
         ticketsByMovieDate(movieId: ID!, date: String): [Ticket]
         GetMovie(Title: String): Movie
+        GetMovies: [Movie]
+        GetMoviesGenre(Genre: String): [Movie]
         GetMovieYear(Title: String, Year: String): Movie
+        getMovieOMDB(movieTitle: String): [truncatedMovie]
+        getLocalMovieList(search: String): [Movie]
+        unusedTimeslots(movieId: String, date: String): [String]
+        unusedTheaters(date: String, timeslot: String): [Int]
     }
     type Mutation{
         register(registerInput: RegisterInput): User!
@@ -57,6 +64,8 @@ module.exports = gql`
         unreserveSeats(seatReservations: SeatReservation): Timeslot
         purchaseTickets(userId: ID!, seats: [Seats]!): [Ticket]
         refundTicket(ticketId: ID!): Ticket
+        removeDate(movieId: String, date: String): Int
+        removeMovie(movieId: String): Int
     }
 
 
@@ -78,7 +87,7 @@ module.exports = gql`
     }
 
     type Ticket{
-        id: ID!
+        id: ID
         userId: String!,
         movieId: String!,
         movieTitle: String!,
@@ -112,4 +121,12 @@ module.exports = gql`
         isReserved: Boolean
     }
 
+    type truncatedMovie{
+        Title:String
+        Year:String
+        Poster:String
+    }
+
 `;
+
+export default gqlStr;
