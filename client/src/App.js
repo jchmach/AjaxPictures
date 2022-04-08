@@ -16,6 +16,7 @@ import Movie from './pages/Movie';
 import AdminActions from './pages/AdminActions';
 import AdminMovie from './pages/AdminMovie';
 import ManageBookings from './pages/ManageBookings';
+import Movies from './pages/Movies';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/adminmovie" element={<AdminMovie/>}/>
             <Route path="/managebookings" element={<ManageBookings/>}/>
             <Route path="/movie/:id" element={<Movie/>}/>
+            <Route path="/Movies" element={<Movies/>}/>
           </Routes>
         </Container>
       </Router>

@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
     Country:String,
     Poster:String,
     imdb:String,
-    MetaScore:String
+    MetaScore:String,
+    trailerUrl:String
 });
 
 export default mongoose.model('Movie', userSchema);
