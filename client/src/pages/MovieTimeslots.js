@@ -37,13 +37,13 @@ function MovieTimeslots(){
     }, [movieData])
 
     const viewSeatMap = (movieId, date, timeSlot) => {
-        setData({movieId: movieId, date: date, timeslot: timeSlot, movieTitle: "The Batman"});
+        setData({movieId: movieId, date: date, timeslot: timeSlot, movieTitle: params.state.title});
     }
 
     return(
         <div id="Purchase_Page">
             <div id="Purchase_MovieInfo">
-                <MovieComponent onPurchasePage={true}  movieName="The Batman"></MovieComponent>           
+                <MovieComponent onPurchasePage={true}  movieName={params.state.title}></MovieComponent>           
             </div>
             <div id="Timeslots">
                 <Timeslots movieId={params.state.movieId} viewSeatMap={viewSeatMap}></Timeslots>

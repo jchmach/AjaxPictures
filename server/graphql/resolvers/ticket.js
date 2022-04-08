@@ -28,14 +28,6 @@ export default {
     Mutation: {
         async purchaseTickets(root, {userId, seats}, context, info){
             var toReturn = []
-            // for (let i = 0; i < seats.length; i++){
-            //     Ticket.create({userId: userId, movieId: seats[i].movieId, movieTitle: seats[i].movieTitle, date: seats[i].date, timeSlot: seats[i].timeSlot, seatRow: seats[i].seatRow, seatNumber: seats[i].seatNumber}, 
-            //         function(err, ticket){
-            //             if (err) throw new UserInputError("Error purchasing ticket for movieId " + seats[i].movieId);
-            //             toReturn.push(ticket);
-            //         });
-            // } 
-
             for (let i = 0; i< seats.length; i++){
                 const ticket = new Ticket({userId: userId, movieId: seats[i].movieId, movieTitle: seats[i].movieTitle, date: seats[i].date, timeSlot: seats[i].timeSlot, seatRow: seats[i].seatRow, seatNumber: seats[i].seatNumber});
                 const res =  await ticket.save();
@@ -45,7 +37,7 @@ export default {
             return toReturn;
         },
         async refundTicket (root, {ticketId}, context, info){
-            return Ticket.deleteOne({id: ticketId});
+            return Ticket.deleteOne({_id: ticketId});
         }
     }
 }

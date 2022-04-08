@@ -7,6 +7,9 @@ const gqlStr = gql`
         token: String!
         username: String!
         createdAt: String!
+        preferredGenre1: String
+        preferredGenre2: String
+        preferredGenre3: String
     }
     type Movie{
         id:ID!
@@ -22,14 +25,19 @@ const gqlStr = gql`
         Poster:String
         imdb:String
         MetaScore:String
-    }
+    } 
+
+
+
     input RegisterInput{
         username: String!
         password: String!
         confirmPassword: String!
         email: String!
+        preferredGenre1: String
+        preferredGenre2: String
+        preferredGenre3: String
     }
-
     type Query{
         timeslot(movieId: String, date: String, timeSlot: String ): Timeslot
         timeslotTimes(movieId: String, date: String): [Timeslot]
@@ -39,7 +47,13 @@ const gqlStr = gql`
         ticketsByDate(date: String): [Ticket]
         ticketsByMovieDate(movieId: ID!, date: String): [Ticket]
         GetMovie(Title: String): Movie
+        GetMovies: [Movie]
+        GetMoviesGenre(Genre: String): [Movie]
         GetMovieYear(Title: String, Year: String): Movie
+        getMovieOMDB(movieTitle: String): [truncatedMovie]
+        getLocalMovieList(search: String): [Movie]
+        unusedTimeslots(movieId: String, date: String): [String]
+        unusedTheaters(date: String, timeslot: String): [Int]
     }
     type Mutation{
         register(registerInput: RegisterInput): User!
@@ -52,6 +66,8 @@ const gqlStr = gql`
         unreserveSeats(seatReservations: SeatReservation): Timeslot
         purchaseTickets(userId: ID!, seats: [Seats]!): [Ticket]
         refundTicket(ticketId: ID!): Ticket
+        removeDate(movieId: String, date: String): Int
+        removeMovie(movieId: String): Int
     }
 
 
@@ -105,6 +121,12 @@ const gqlStr = gql`
         number: String
         id: String
         isReserved: Boolean
+    }
+
+    type truncatedMovie{
+        Title:String
+        Year:String
+        Poster:String
     }
 
 `;

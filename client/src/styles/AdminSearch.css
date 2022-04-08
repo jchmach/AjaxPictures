@@ -1,0 +1,43 @@
+
+#Go_Back{
+    border-radius: 2px;
+    border-style: solid;
+    border-color: cornflowerblue;
+    background-color: white;
+    color: cornflowerblue;
+}
+#Go_Back:hover{
+    border-radius: 2px;
+    border-style: solid;
+    border-color: cornflowerblue;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+#Admin_Search{
+    width: 1000px;
+}
+
+#Search{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+#Admin_Search_Button{
+    margin-left: auto;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: cornflowerblue;
+    background-color: white;
+    color: cornflowerblue;
+}
+
+#Admin_Search_Button:hover{
+    margin-left: auto;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: cornflowerblue;
+    background-color: cornflowerblue;
+    color: white;
+}
