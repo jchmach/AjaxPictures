@@ -11,8 +11,8 @@ export default function MovieComponent(props) {
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
 
-    console.log(data.GetMovie)
     const movieItem = data.GetMovie
+    console.log(movieItem.trailerUrl)
 
   return (
     <div className="ui segment">
@@ -74,7 +74,7 @@ export default function MovieComponent(props) {
         <p></p>
         <p></p>
         <div>
-        <iframe width="520" height="315"
+        <iframe width="500" height="400"
             src= {movieItem.trailerUrl}
             frameborder="0"
             allow="autoplay; encrypted-media"
