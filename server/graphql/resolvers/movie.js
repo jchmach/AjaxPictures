@@ -26,7 +26,7 @@ export default {
             return results
         },
         async getLocalMovieList(root, {search}, context, info){
-            const movie = await Movie.find({Title: {"$regex": search}});
+            const movie = await Movie.find({Title: {"$regex": new RegExp(search, "i")}});
             if (!movie.length) throw new UserInputError("Movie " + search +" does not exist in database")
             return movie
         },
