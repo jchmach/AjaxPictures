@@ -26,7 +26,7 @@ services:
         - DEFAULT_EMAIL=justin.mach@mail.utoronto.ca
         
   client:
-    image: ghcr.io/utscc09/client-jchmach:justinadminbranch
+    image: ghcr.io/utscc09/client-jchmach:dev
     container_name: ajaxclient
     restart: always
     expose:
@@ -36,7 +36,7 @@ services:
       - LETSENCRYPT_HOST=ajaxpictures.me, www.ajaxpictures.me
       
   server:
-    image: ghcr.io/utscc09/server-jchmach:justinadminbranch
+    image: ghcr.io/utscc09/server-jchmach:dev
     container_name: ajaxserver
     restart: always
     expose:
