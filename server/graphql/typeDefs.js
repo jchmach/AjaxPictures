@@ -7,6 +7,9 @@ const gqlStr = gql`
         token: String!
         username: String!
         createdAt: String!
+        preferredGenre1: String
+        preferredGenre2: String
+        preferredGenre3: String
     }
     type Movie{
         id:ID!
@@ -31,8 +34,10 @@ const gqlStr = gql`
         password: String!
         confirmPassword: String!
         email: String!
+        preferredGenre1: String
+        preferredGenre2: String
+        preferredGenre3: String
     }
-
     type Query{
         timeslot(movieId: String, date: String, timeSlot: String ): Timeslot
         timeslotTimes(movieId: String, date: String): [Timeslot]

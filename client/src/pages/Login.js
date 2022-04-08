@@ -21,6 +21,7 @@ function Login(){
             console.log(result)
             context.login(result.data.login);
             navigate('/');
+            window.location.reload();
         },
         onError(err){
             setErrors(err.graphQLErrors[0].extensions.errors);
