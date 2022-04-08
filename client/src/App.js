@@ -14,6 +14,7 @@ import PurchaseTicket from './pages/PurchaseTicket';
 import MenuBar from './components/MenuBar';
 import Movie from './pages/Movie';
 import ManageBookings from './pages/ManageBookings';
+import Movies from './pages/Movies';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/movie" element={<Movie/>}/>
             <Route path="/managebookings" element={<ManageBookings/>}/>
             <Route path="/movie/:id" element={<Movie/>}/>
+            <Route path="/Movies" element={<Movies/>}/>
           </Routes>
         </Container>
       </Router>

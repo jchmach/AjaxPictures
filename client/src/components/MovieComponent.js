@@ -73,6 +73,15 @@ export default function MovieComponent(props) {
         <p></p>
         <p></p>
         <p></p>
+        <div>
+        <iframe
+            src= {movieItem.trailerUrl}
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            title="video"
+        />{" "}
+        </div>
         {onPurchasePage? null : <button className="blue massive ui button" onClick={() => navigateNext(movieItem.id)}>
                                     Buy Ticket
                                 </button>}
@@ -102,6 +111,7 @@ const GET_MOVIE = gql `
         imdb
         Poster
         MetaScore
+        trailerUrl
         }
   }
 `;

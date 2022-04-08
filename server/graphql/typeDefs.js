@@ -22,6 +22,7 @@ const gqlStr = gql`
         Poster:String
         imdb:String
         MetaScore:String
+        trailerUrl:String
     }
     input RegisterInput{
         username: String!

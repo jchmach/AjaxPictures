@@ -34,9 +34,16 @@ export default {
             const mov = await axios.get("https://www.omdbapi.com/?t=" 
                             + Title
                             + "&apikey=362bd303")
-            movie = mov.data
-            console.log(movie.Title)
-            result_movie = {
+            console.log(mov)
+            let movie = mov.data
+            console.log(movie)
+            const trailer = await axios.get("https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCi8e0iOVk1fEOogdfu4YgfA&order=relevance&q=" +
+            movie.Title + "%20trailer&key=AIzaSyB9_jyOLb4eA5Tq1Ug1IT8kNsDV5LO6RuU")
+            let first_item = ((trailer.data.items)[0])
+            console.log(first_item)
+            let trailerUrl = "https://www.youtube.com/embed/" + first_item.id.videoId
+            console.log(trailerUrl)
+            let result_movie = {
                 Title: movie.Title,
                 Year: movie.Year,
                 Plot: movie.Plot,
@@ -49,6 +56,7 @@ export default {
                 Poster: movie.Poster,
                 imdb: movie.imdbRating,
                 MetaScore: movie.Metascore,
+                trailerUrl:trailerUrl
             }
             console.log(result_movie)
 

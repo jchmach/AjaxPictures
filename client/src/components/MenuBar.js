@@ -20,11 +20,11 @@ function MenuBar() {
           to="/"
         />
         <Menu.Item
-          name='Movie'
-          active={activeItem === 'Movie'}
+          name='Movies'
+          active={activeItem === 'Movies'}
           onClick={handleItemClick}
           as={Link}
-          to="/Movie"
+          to="/Movies"
         />
         <Menu.Menu position='right'>
           <Menu.Item
@@ -55,11 +55,11 @@ function MenuBar() {
           to="/"
         />
         <Menu.Item
-          name='Movie'
-          active={activeItem === 'Movie'}
+          name='Movies'
+          active={activeItem === 'Movies'}
           onClick={handleItemClick}
           as={Link}
-          to="/Movie"
+          to="/Movies"
         />
         <Menu.Menu position='right'>
           <Menu.Item
