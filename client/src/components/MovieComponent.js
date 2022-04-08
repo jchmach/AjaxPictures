@@ -74,7 +74,7 @@ export default function MovieComponent(props) {
         <p></p>
         <p></p>
         <div>
-        <iframe
+        <iframe width="520" height="315"
             src= {movieItem.trailerUrl}
             frameborder="0"
             allow="autoplay; encrypted-media"
