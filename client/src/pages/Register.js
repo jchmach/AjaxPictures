@@ -56,6 +56,12 @@ function Register(){
             value: 'Horror',
 
         }, 
+        {
+            key: 'Drama',
+            text: 'Drama',
+            value: 'Drama',
+
+        }, 
     ]
     let navigate = useNavigate();
     const [errors, setErrors] = useState ({})

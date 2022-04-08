@@ -21,7 +21,15 @@ function Home(){
             </h1>
             <h1 class="ui header">Romance</h1>
             <h1>
-                <MovieCoulmn genre={"Drama, Romance"}></MovieCoulmn>
+                <MovieCoulmn genre={"Romance"}></MovieCoulmn>
+            </h1>
+            <h1 class="ui header">Drama</h1>
+            <h1>
+                <MovieCoulmn genre={"Drama"}></MovieCoulmn>
+            </h1>
+            <h1 class="ui header">Adventure</h1>
+            <h1>
+                <MovieCoulmn genre={"Adventure"}></MovieCoulmn>
             </h1>
         </div>
     ) :
@@ -34,6 +42,14 @@ function Home(){
             <h1 class="ui header">Romance</h1>
             <h1>
                 <MovieCoulmn genre={"Drama, Romance"}></MovieCoulmn>
+            </h1>
+            <h1 class="ui header">Drama</h1>
+            <h1>
+                <MovieCoulmn genre={"Drama"}></MovieCoulmn>
+            </h1>
+            <h1 class="ui header">Adventure</h1>
+            <h1>
+                <MovieCoulmn genre={"Adventure"}></MovieCoulmn>
             </h1>
         </div>
     );
