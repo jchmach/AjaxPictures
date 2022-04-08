@@ -35,8 +35,8 @@ export default {
                             + Title
                             + "&apikey=362bd303")
             let movie = mov.data
-            const trailer = await axios.get("https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCi8e0iOVk1fEOogdfu4YgfA&order=relevance&q=" +
-            movie.Title + "%20trailer&key=AIzaSyB9_jyOLb4eA5Tq1Ug1IT8kNsDV5LO6RuU")
+            const trailer = await axios.get("https://youtube.googleapis.com/youtube/v3/search?part=snippet&order=relevance&q=" +
+            movie.Title + "%20" + movie.Year + "%20trailer&key=AIzaSyB9_jyOLb4eA5Tq1Ug1IT8kNsDV5LO6RuU")
             let first_item = ((trailer.data.items)[0])
             let trailerUrl = "https://www.youtube.com/embed/" + first_item.id.videoId
             let result_movie = {
