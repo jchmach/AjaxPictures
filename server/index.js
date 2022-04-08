@@ -3,11 +3,12 @@ import mongoose from 'mongoose'
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
 import { CONNECTION_URL } from './config.js';
-
+import {ApolloServerPluginLandingPageDisabled} from "apollo-server-core";
 const server = new ApolloServer ({
     typeDefs,
     resolvers,
-    context:({req}) => ({req})
+    context:({req}) => ({req}),
+    plugins: [ApolloServerPluginLandingPageDisabled()]
 });
 
 mongoose.
