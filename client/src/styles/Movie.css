@@ -1,5 +1,4 @@
 .ui.container {
-    overflow: auto;
     white-space: nowrap;
   }
   .ui.card {
@@ -15,4 +14,17 @@
     padding: 0;
     background: rgba(0,0,0,.05);
     height: 4.8in;
+}
+
+.MovieList {
+  overflow: hidden;
+}
+
+.MovieRow {
+  overflow: auto;
+}
+
+
+.MoviePlot{
+  white-space: pre-line;
 }

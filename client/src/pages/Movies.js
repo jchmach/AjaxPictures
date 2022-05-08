@@ -25,7 +25,7 @@ export default function Movies() {
         </a>
     );  
     return (
-        <div class="ui two column centered grid">
+        <div class="ui two column centered grid MovieList">
             {movieItems}
         </div>  
     )

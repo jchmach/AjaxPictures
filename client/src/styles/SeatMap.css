@@ -55,6 +55,7 @@ div.blank {
   border-radius: 2px;
   background-color: cornflowerblue;
   color: white;
+  margin-bottom: 20px;
 }
 
 #SeatMap_Purchase{
@@ -66,4 +67,5 @@ div.blank {
   border-color: cornflowerblue;
   background-color: white;
   color: cornflowerblue;
+  margin-bottom: 20px;
 }

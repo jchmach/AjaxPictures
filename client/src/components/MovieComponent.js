@@ -1,5 +1,6 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client';
+import "../styles/Movie.css";
 
 export default function MovieComponent(props) {
 
@@ -29,7 +30,7 @@ export default function MovieComponent(props) {
             <div className="red ui horizontal label">Year</div>
             {movieItem.Year}
         </a>
-        <a class="item">
+        <a class="item MoviePlot">
             <div className="red ui horizontal label">Plot</div>
             {movieItem.Plot}
         </a>

@@ -29,7 +29,7 @@ export default function MovieCoulmn(props) {
         <MovieCard Title={movie.Title} Poster={movie.Poster}></MovieCard>
     );  
     return (
-        <div class="ui container">
+        <div class="ui container MovieRow">
             {movieItems}
         </div>  
     )
