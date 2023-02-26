@@ -6,6 +6,14 @@
 
 https://ajaxpictures.me
 
+
+**EDIT:** As the vm used to deploy the project is no longer running, the above URL does not work. To run the project, the repository must be cloned and the project must be run locally. 
+
+### To run the project (as of 2023)
+1. Run `npm install` in both the `server` and `client` folders
+2. Run `node index.js` in the `server` folder
+3. Run `npm start` in the `client` folder
+
 ## Project Video URL 
 
 **Task:** Provide the link to your youtube video. Please make sure the link works.
